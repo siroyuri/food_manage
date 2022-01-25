@@ -30,6 +30,7 @@
 | Column         | Type       | option                         |
 | -------------- | ---------- | ------------------------------ |
 | name           | string     | null: false                    |
+| unit_id        | integer    |                                |
 | quantity_total | integer    | null: false                    |
 | user           | references | null: false, foreign_key: true |
 | category       | references | null: false, foreign_key: true |
@@ -48,7 +49,8 @@
 | deadline      | date       |                                |
 | purchase_date | date       |                                |
 | quantity      | integer    |                                |
-| unit_id       | integer    |                                |
+| is_frozen     | boolean    | null: false, default: false    |
+| user          | references | null: false, foreign_key: true |
 | item          | references | null: false, foreign_key: true |
 
 ### Association
@@ -69,7 +71,6 @@
 ## usesテーブル
 | Column   | Type       | option                         |
 | -------- | ---------- | ------------------------------ |
-| name     | string     | null: false                    |
 | quantity | integer    | null: false                    |
 | status   | boolean    | null: false, default: false    |
 | user     | references | null: false, foreign_key: true |
