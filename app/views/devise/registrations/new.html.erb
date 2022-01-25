@@ -1,0 +1,31 @@
+<%= form_with model: @user, url: user_registration_path, local: true do |f| %>
+<div>
+新規登録
+</div>
+
+<div>
+<%= f.label :name %><br />
+<%= f.text_area :name %>
+</div>
+
+<div>
+<%= f.label :email %><br />
+<%= f.email_field :email %>
+</div>
+
+<div>
+<%= f.label :password %><br />
+<%= f.password_field :password, autocomplete: "new-password" %>
+</div>
+
+<div>
+<%= f.label :password_confirmation %><br />
+<%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+</div>
+
+<div>
+<%= f.submit "登録" %>
+</div>
+<% end %>
+
+<div><%= link_to "ログインはこちらから", new_user_session_path %></div>
