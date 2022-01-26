@@ -8,7 +8,6 @@ class CategoryList < ActiveHash::Base
     { id: 11, name: '乳製品' }, { id: 12, name: '調味料・食用油' },
     { id: 13, name: 'タレ・ソース・ドレッシング' }, { id: 14, name: 'ルー' },
     { id: 15, name: '缶詰・瓶詰' }, { id: 16, name: 'インスタント食品' }
-    ]
   ]
 
   include ActiveHash::Associations

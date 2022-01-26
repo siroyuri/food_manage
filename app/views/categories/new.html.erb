@@ -1,0 +1,15 @@
+<%= form_with model: @category, url: categories_path, local: true do |f| %>
+<div>
+  カテゴリー追加
+</div>
+
+<div>
+  <%= f.collection_check_boxes(:category_list_id, @category_list, :id, :name, { include_hidden: false }) do |l| %>
+    <%= l.label { l.check_box + l.text } %>
+  <% end %>
+</div>
+
+<div>
+  <%= f.submit '追加' %>
+</div>
+<% end %>
