@@ -1,5 +1,6 @@
 class CategoryList < ActiveHash::Base
   self.data = [
+    # { id: 0, name: '新規追加枠' }
     { id: 1, name: '肉・肉加工品' }, { id: 2, name: '野菜' },
     { id: 3, name: '魚介' }, {id: 4, name: '果物' },
     { id: 5, name: 'きのこ類' }, { id: 6, name: '豆・豆加工品' },
