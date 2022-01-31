@@ -7,3 +7,19 @@
   <div><%= link_to "ログイン", new_user_session_path %></div>
   <div><%= link_to "新規登録", new_user_registration_path %></div>
 <% end %>
+
+<% if flash[:success] || flash[:error] %>
+  <div><%= flash[:success] %></div>
+  <div><%= flash[:error] %></div>
+<% end %>
+
+<% @categories.each do |category| %>
+  <div>
+    <%= link_to '-', category_path(category.id), method: :delete %>
+    <% if category.category_list_id != 0 %>
+      <%= category.category_list.name %>
+    <% else %>
+      <%= category.name %>
+    <% end %>
+  </div>
+<% end %>
