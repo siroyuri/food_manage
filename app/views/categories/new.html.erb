@@ -1,0 +1,23 @@
+<div>
+  <h3>カテゴリー追加</h3>
+</div>
+
+<div>
+  <%= form_with mofel: @category, url: categories_path, remote: true do |input_f| %>
+    <%= input_f.text_area :name, placeholder: "10文字以内", maxlength: 10, id: "js_input_field" %>
+    <%= input_f.submit '追加' %>
+  <% end %>
+</div>
+
+<div>
+  <%= form_with model: @category, url: categories_path, local: true do |select_f| %>
+    <%= select_f.collection_check_boxes(:category_list_id, @category_list, :id, :name, { include_hidden: false }) do |l| %>
+      <%= l.label { l.check_box + l.text } %>
+    <% end %>
+</div>
+
+<div>
+  <div id="js_input_category"></div>
+  <%= select_f.submit '追加' %>
+  <% end %>
+</div>
