@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_25_082129) do
+ActiveRecord::Schema.define(version: 2022_02_01_084137) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -19,6 +19,31 @@ ActiveRecord::Schema.define(version: 2022_01_25_082129) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "item_informations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.date "deadline"
+    t.date "purchase_date"
+    t.float "quantity"
+    t.boolean "is_frozen", default: false, null: false
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_item_informations_on_item_id"
+    t.index ["user_id"], name: "index_item_informations_on_user_id"
+  end
+
+  create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "unit_id"
+    t.float "quantity_total", default: 0.0, null: false
+    t.bigint "user_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_items_on_category_id"
+    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -35,4 +60,8 @@ ActiveRecord::Schema.define(version: 2022_01_25_082129) do
   end
 
   add_foreign_key "categories", "users"
+  add_foreign_key "item_informations", "items"
+  add_foreign_key "item_informations", "users"
+  add_foreign_key "items", "categories"
+  add_foreign_key "items", "users"
 end

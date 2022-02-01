@@ -31,7 +31,7 @@
 | -------------- | ---------- | ------------------------------ |
 | name           | string     | null: false                    |
 | unit_id        | integer    |                                |
-| quantity_total | integer    | null: false                    |
+| quantity_total | integer    | null: false, default: false    |
 | user           | references | null: false, foreign_key: true |
 | category       | references | null: false, foreign_key: true |
 
