@@ -30,7 +30,7 @@
 | Column         | Type       | option                         |
 | -------------- | ---------- | ------------------------------ |
 | name           | string     | null: false                    |
-| unit_id        | integer    |                                |
+| unit_id        | string     |                                |
 | quantity_total | integer    | null: false, default: false    |
 | user           | references | null: false, foreign_key: true |
 | category       | references | null: false, foreign_key: true |
