@@ -1,6 +1,6 @@
 class Category < ApplicationRecord
   belongs_to :user
-  has_many :items
+  has_many :items, dependent: :destroy
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category_list
 
