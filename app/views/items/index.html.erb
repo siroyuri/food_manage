@@ -22,6 +22,8 @@
       <%= category.name %>
     <% end %>
   </div>
-<% end %>
 
-<%= render 'item_information_form', item: @item, category_id: 25 %>
+  <div id="js_item_new_or_list_<%= category.id %>">
+    <%= render 'add_item_form_btn', category_id: category.id %>
+  </div>
+<% end %>

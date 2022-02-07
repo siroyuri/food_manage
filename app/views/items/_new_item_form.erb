@@ -1,8 +1,10 @@
-<div id="js_item_new_form">
+<div class="js_item_form">
+  <div id="category_id" hidden><%= category_id %></div>
+  <%= button_to '追加をやめる', remove_form_item_path(category_id), { method: :get, remote: :true } %>
   <%= form_with model: item, url: items_path, local: true do |f| %>
     <%= f.hidden_field :category_id, value: category_id %>
     <%= f.hidden_field :item_id, value: 0 %>
-    <%= f.hidden_field :quantity_total, value: 0, id: "js_quantity_total" %>
+    <%= f.hidden_field :quantity_total, value: 0 %>
 
     <%= f.check_box :is_frozen, {}, "true", "false" %>
     <%= f.text_field :name, placeholder: "名前(20文字以内)", maxlength: "20" %>

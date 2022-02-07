@@ -20,6 +20,16 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def add_form
+    @item = ItemWithInformation.new
+    @category_id = params[:id]
+    @items = Item.where(user_id: current_user.id, category_id: @category_id).includes(:item_informations)
+  end
+
+  def remove_form
+    @category_id = params[:id]
+  end
+
   private
 
   def item_params
