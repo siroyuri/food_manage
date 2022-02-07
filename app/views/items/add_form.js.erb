@@ -2,12 +2,12 @@ $(function () {
   if ($('.js_item_form').length) {
     var categoryId = $('.js_item_form').find('#category_id').text();
     console.log(categoryId)
-    $("<%= j(render 'add_item_form_btn', category_id: 0)%>").replaceAll($('.js_item_form')).attr('action', `/items/${categoryId}/add_form`);
+    $("<%= j(render 'items/form/add_item_form_btn', category_id: 0)%>").replaceAll($('.js_item_form')).attr('action', `/items/${categoryId}/add_form`);
   }
 
   <% if @items.present? %>
-    $('#js_item_new_or_list_<%= @category_id %>').html("<%= j(render 'list_item_form', item: @item, items: @items, category_id: @category_id)%>");
+    $('#js_item_new_or_list_<%= @category_id %>').html("<%= j(render 'items/form/list_item_form', item: @item, items: @items, category_id: @category_id)%>");
   <% else %>
-    $('#js_item_new_or_list_<%= @category_id %>').html("<%= j(render 'new_item_form', item: @item, category_id: @category_id)%>");
+    $('#js_item_new_or_list_<%= @category_id %>').html("<%= j(render 'items/form/new_item_form', item: @item, category_id: @category_id)%>");
   <% end %>
 });
