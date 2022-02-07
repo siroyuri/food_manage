@@ -30,6 +30,12 @@ class ItemsController < ApplicationController
     @category_id = params[:id]
   end
 
+  def switching_forms
+    @item = ItemWithInformation.new
+    @category_id = params[:id]
+    @items = Item.where(user_id: current_user.id, category_id: @category_id).includes(:item_informations)
+  end
+
   private
 
   def item_params

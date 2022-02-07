@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get :value_input
       get :add_form
       get :remove_form
+      get :switching_forms
     end
   end
 end

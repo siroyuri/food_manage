@@ -1,6 +1,7 @@
-<div class="js_item_form">
+<div class="js_item_form" id="js_new_item_form">
   <div id="category_id" hidden><%= category_id %></div>
   <%= button_to '追加をやめる', remove_form_item_path(category_id), { method: :get, remote: :true } %>
+  <%= button_to 'リストから選択する', switching_forms_item_path(category_id), { method: :get, remote: :true } %>
   <%= form_with model: item, url: items_path, local: true do |f| %>
     <%= f.hidden_field :category_id, value: category_id %>
     <%= f.hidden_field :item_id, value: 0 %>
