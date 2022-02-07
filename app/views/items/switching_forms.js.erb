@@ -1,0 +1,7 @@
+$(function () {
+  if ($('#js_list_item_form').length) {
+    $('.js_item_form').replaceWith("<%= j(render 'items/form/new_item_form', item: @item, category_id: @category_id)%>");
+  } else {
+    $('.js_item_form').replaceWith("<%= j(render 'items/form/list_item_form', item: @item, items: @items, category_id: @category_id)%>");
+  }
+});

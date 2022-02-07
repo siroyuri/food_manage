@@ -1,0 +1,6 @@
+<% if category_id == item.category_id %>
+<div>
+  <%= item.name %>:
+  <%= render partial: 'items/top_page/item_information', collection: item.item_informations, as: 'info', locals: { unit: item.unit } %>
+</div>
+<% end %>

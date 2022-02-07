@@ -1,0 +1,21 @@
+<div class="js_item_form" id="js_new_item_form">
+  <div id="category_id" hidden><%= category_id %></div>
+  <%= button_to '追加をやめる', remove_form_item_path(category_id), { method: :get, remote: :true } %>
+  <%= button_to 'リストから選択する', switching_forms_item_path(category_id), { method: :get, remote: :true } %>
+  <%= form_with model: item, url: items_path, local: true do |f| %>
+    <%= f.hidden_field :category_id, value: category_id %>
+    <%= f.hidden_field :item_id, value: 0 %>
+    <%= f.hidden_field :quantity_total, value: 0 %>
+
+    <%= f.check_box :is_frozen, {}, "true", "false" %>
+    <%= f.text_field :name, placeholder: "名前(20文字以内)", maxlength: "20" %>
+    <%= f.number_field :quantity, step: "0.5", placeholder: "数量(0.5単位)" %>
+    <%= f.text_field :unit, placeholder: "単位" %>
+    <%= f.label :deadline %>
+    <%= f.date_field(:deadline, {}) %>
+    <%= f.label :purchase_date %>
+    <%= f.date_field(:purchase_date, {value: Time.now.strftime("%Y-%m-%d")}) %>
+
+    <%= f.submit '送信' %>
+  <% end %>
+</div>

@@ -13,13 +13,4 @@
   <div><%= flash[:error] %></div>
 <% end %>
 
-<% @categories.each do |category| %>
-  <div>
-    <%= link_to '-', category_path(category.id), method: :delete %>
-    <% if category.category_list_id != 0 %>
-      <%= category.category_list.name %>
-    <% else %>
-      <%= category.name %>
-    <% end %>
-  </div>
-<% end %>
+<%= render partial: 'items/top_page/category', collection: @categories, as: 'category' %>
