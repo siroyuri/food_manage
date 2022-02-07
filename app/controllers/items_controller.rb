@@ -4,7 +4,10 @@ class ItemsController < ApplicationController
   def index
     @categories = Category.where(user_id: current_user.id).order("category_list_id ASC")
     @item = ItemWithInformation.new
-    @items = Item.where(user_id: current_user.id).includes(:item_informations)
+    sql = "SELECT item_id, SUM(quantity) AS quantity_total FROM item_informations GROUP BY item_id HAVING COUNT(item_id) > 1"
+    @sum_quantities = ItemInformation.find_by_sql(sql)
+    @multi_items = Item.where(user_id: current_user.id, id: @sum_quantities.pluck(:item_id)).includes(:item_informations).order("category_id ASC")
+    @single_items = Item.where(user_id: current_user.id).where.not(id: @sum_quantities.pluck(:item_id)).includes(:item_informations).order("category_id ASC")
   end
 
   def create

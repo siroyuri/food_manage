@@ -1,0 +1,13 @@
+<div>
+  <% if info.quantity % 1 == 0 %>
+    <%= info.quantity.floor %>
+  <% else %>
+    <%= info.quantity %>
+  <% end %>
+    <%= unit %>:
+  <% if info.deadline.present? %>
+    <%= info.deadline %>
+  <% else %>
+    <%= info.purchase_date %>
+  <% end %>
+</div>

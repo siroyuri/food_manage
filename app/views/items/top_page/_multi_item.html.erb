@@ -1,0 +1,16 @@
+<% if category_id == items.category_id %>
+<div>
+  <%= items.name %>:
+  <% @sum_quantities.each do |sum_quantity| %>
+  <% if items.id == sum_quantity.item_id %>
+    <% if sum_quantity.quantity_total % 1 == 0 %>
+    <%= sum_quantity.quantity_total.floor %>
+    <% else %>
+      <%= sum_quantity.quantity_total %>
+    <% end %>
+    <%= items.unit %>
+  <% end %>
+  <% end %>
+  <%= render partial: 'items/top_page/item_information', collection: items.item_informations, as: 'info', locals: { unit: items.unit } %>
+</div>
+<% end %>
