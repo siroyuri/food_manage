@@ -1,5 +1,6 @@
 <% if category_id == item.category_id %>
 <div>
+  <%= link_to '削除', item_path(item.id), method: :delete %>
   <%= item.name %>:
   <%= render partial: 'items/top_page/item_information', collection: item.item_informations, as: 'info', locals: { unit: item.unit } %>
 </div>
