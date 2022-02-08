@@ -1,5 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item, only: [:edit, :destroy, :value_input]
+  before_action :set_category_id, only: [:add_form, :remove_form, :switching_forms]
+  before_action :set_items, only: [:add_form, :switching_forms]
   
   def index
     @categories = Category.where(user_id: current_user.id).order("category_list_id ASC")
@@ -20,33 +23,43 @@ class ItemsController < ApplicationController
     redirect_to root_path
   end
 
+  def edit
+  end
+
+  def update
+  end
+
   def destroy
-    item = Item.find(params[:id])
-    item.destroy
+    @item.destroy
     redirect_to root_path
   end
 
   def value_input
-    @item = Item.find(params[:id])
   end
 
   def add_form
-    @item = ItemWithInformation.new
-    @category_id = params[:id]
-    @items = Item.where(user_id: current_user.id, category_id: @category_id).includes(:item_informations)
   end
 
   def remove_form
-    @category_id = params[:id]
   end
 
   def switching_forms
-    @item = ItemWithInformation.new
-    @category_id = params[:id]
-    @items = Item.where(user_id: current_user.id, category_id: @category_id).includes(:item_informations)
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  def set_category_id
+    @category_id = params[:id]
+  end
+
+  def set_items
+    @item = ItemWithInformation.new
+    @items = Item.where(user_id: current_user.id, category_id: @category_id).includes(:item_informations)
+  end
 
   def item_params
     params.require(:item_with_information).permit(:name, :unit, :quantity_total, :category_id, :deadline, :purchase_date, :quantity, :is_frozen, :item_id).merge(user_id: current_user.id)
