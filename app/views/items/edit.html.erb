@@ -1,0 +1,8 @@
+<%= form_with model: @item, local: true do |f| %>
+  <%= f.hidden_field :category_id %>
+
+  <%= f.text_field :name, placeholder: "名前(20文字以内)", maxlength: "20" %>
+  <%= f.text_field :unit, placeholder: "単位" %>
+
+  <%= f.submit '送信' %>
+<% end %>

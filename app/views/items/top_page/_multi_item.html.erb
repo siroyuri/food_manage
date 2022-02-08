@@ -1,6 +1,7 @@
 <% if category_id == items.category_id %>
 <div>
   <%= link_to '削除', item_path(items.id), method: :delete %>
+  <%= link_to '編集', edit_item_path(items.id) %>
   <%= items.name %>:
   <% @sum_quantities.each do |sum_quantity| %>
   <% if items.id == sum_quantity.item_id %>

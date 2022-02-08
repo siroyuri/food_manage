@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:edit, :destroy, :value_input]
+  before_action :set_item, only: [:edit, :update, :destroy, :value_input]
   before_action :set_category_id, only: [:add_form, :remove_form, :switching_forms]
   before_action :set_items, only: [:add_form, :switching_forms]
   
@@ -15,7 +15,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    if ItemWithInformation.singular_save(item_params)
+    if ItemWithInformation.singular_save(item_with_information_params)
       flash[:success] = "保存に成功しました"
     else
       flash[:error] = "保存に失敗しました"
@@ -27,6 +27,8 @@ class ItemsController < ApplicationController
   end
 
   def update
+    @item.update(item_params)
+    redirect_to root_path
   end
 
   def destroy
@@ -61,7 +63,11 @@ class ItemsController < ApplicationController
     @items = Item.where(user_id: current_user.id, category_id: @category_id).includes(:item_informations)
   end
 
-  def item_params
+  def item_with_information_params
     params.require(:item_with_information).permit(:name, :unit, :quantity_total, :category_id, :deadline, :purchase_date, :quantity, :is_frozen, :item_id).merge(user_id: current_user.id)
+  end
+
+  def item_params
+    params.require(:item).permit(:name, :unit, :category_id).merge(user_id: current_user.id)
   end
 end
