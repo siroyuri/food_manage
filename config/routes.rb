@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'items#index'
-  resources :categories, only: [:new, :create, :destroy]
-  resources :items, only: [:index, :create, :destroy] do
+  resources :categories, only: [:new, :create, :edit, :update, :destroy]
+  resources :items, only: [:index, :create, :edit, :update, :destroy] do
     member do
       get :value_input
       get :add_form
@@ -10,5 +10,5 @@ Rails.application.routes.draw do
       get :switching_forms
     end
   end
-  resources :item_informations, only: [:destroy]
+  resources :item_informations, only: [:edit, :update, :destroy]
 end
