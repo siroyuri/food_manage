@@ -1,4 +1,5 @@
 <div>
+  <%= link_to '削除', item_information_path(info.id), method: :delete %>
   <% if info.quantity % 1 == 0 %>
     <%= info.quantity.floor %>
   <% else %>
