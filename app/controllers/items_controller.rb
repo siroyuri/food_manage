@@ -5,13 +5,12 @@ class ItemsController < ApplicationController
   before_action :set_items, only: [:add_form]
   
   def index
-    @categories = Category.where(user_id: current_user.id).order("category_list_id ASC")
+    @categories = current_user.categories.order("category_list_id ASC")
     @item = ItemWithInformation.new
-    sql1 = "SELECT item_id, SUM(quantity) AS quantity_total FROM item_informations GROUP BY item_id HAVING COUNT(item_id) > 1"
+    sql1 = "SELECT item_id, SUM(quantity) AS quantity_total FROM item_informations WHERE user_id = #{current_user.id} GROUP BY item_id HAVING COUNT(item_id) > 1"
     @sum_quantities = ItemInformation.find_by_sql(sql1)
-    @multi_items = Item.where(user_id: current_user.id, id: @sum_quantities.pluck(:item_id)).includes(:item_informations).order("category_id ASC")
-    sql2 = "SELECT * FROM items WHERE id IN (SELECT item_id FROM item_informations GROUP BY item_id HAVING COUNT(item_id) = 1)"
-    @single_items = Item.find_by_sql(sql2)
+    @multi_items = Item.where(id: @sum_quantities.pluck(:item_id)).includes(:item_informations).order("category_id ASC")
+    @single_items = current_user.items.where.not(id: @multi_items.pluck(:id)).includes(:item_informations).order("category_id ASC")
   end
 
   def create
@@ -58,7 +57,7 @@ class ItemsController < ApplicationController
 
   def set_items
     @item = ItemWithInformation.new
-    @items = Item.where(user_id: current_user.id, category_id: @category_id).includes(:item_informations)
+    @items = current_user.items.where(category_id: @category_id).includes(:item_informations)
   end
 
   def item_with_information_params

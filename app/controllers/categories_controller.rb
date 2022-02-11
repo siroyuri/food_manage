@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
-    @categories = Category.where(user_id: current_user.id)
+    @categories = current_user.categories
     @category_list = CategoryList.where.not(id: @categories.pluck(:category_list_id))
   end
 
