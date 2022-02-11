@@ -1,7 +1,6 @@
-<div class="js_item_form" id="js_list_item_form">
+<div class="js_item_form">
   <div id="category_id" hidden><%= category_id %></div>
   <%= button_to '追加をやめる', remove_form_item_path(category_id), { method: :get, remote: :true } %>
-  <%= button_to '新しい食材を追加する', switching_forms_item_path(@category_id), { method: :get, remote: :true } %>
   <% items.each do |item| %>
     <div>
       <%= button_to item.name, value_input_item_path(item.id), { method: :get, remote: true } %>

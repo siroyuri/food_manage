@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item, only: [:edit, :update, :destroy, :value_input]
-  before_action :set_category_id, only: [:add_form, :remove_form, :switching_forms]
-  before_action :set_items, only: [:add_form, :switching_forms]
+  before_action :set_category_id, only: [:add_form, :remove_form]
+  before_action :set_items, only: [:add_form]
   
   def index
     @categories = Category.where(user_id: current_user.id).order("category_list_id ASC")
@@ -44,9 +44,6 @@ class ItemsController < ApplicationController
   end
 
   def remove_form
-  end
-
-  def switching_forms
   end
 
   private
