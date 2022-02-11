@@ -1,6 +1,6 @@
 class ItemWithInformation
   include ActiveModel::Model
-  attr_accessor :name, :unit, :quantity_total, :category_id, :user_id, :deadline, :purchase_date, :quantity, :is_frozen, :item_id
+  attr_accessor :name, :unit, :category_id, :user_id, :deadline, :purchase_date, :quantity, :is_frozen, :item_id
 
   with_options presence: true do
     validates :name, :quantity_total, :category_id, :user, :item_id
@@ -17,11 +17,9 @@ class ItemWithInformation
   def self.singular_save(params)
     ActiveRecord::Base.transaction do
       if params[:item_id] == "0"
-        item = Item.create!(name: params[:name], unit: params[:unit], quantity_total: params[:quantity_total], category_id: params[:category_id], user_id: params[:user_id])
+        item = Item.create!(name: params[:name], unit: params[:unit], category_id: params[:category_id], user_id: params[:user_id])
         ItemInformation.create!(deadline: params[:deadline], purchase_date: params[:purchase_date], quantity: params[:quantity], user_id: params[:user_id], item_id: item.id)
       else
-        item = Item.find(params[:item_id])
-        item.update!(quantity_total: params[:quantity_total])
         ItemInformation.create!(deadline: params[:deadline], purchase_date: params[:purchase_date], quantity: params[:quantity], user_id: params[:user_id], item_id: params[:item_id])
       end
     end

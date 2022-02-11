@@ -1,9 +1,10 @@
 <div>
-  <%= link_to '-', category_path(category.id), method: :delete %>
-  <% if category.category_list_id != 0 %>
-    <%= category.category_list.name %>
-  <% else %>
+  <%= link_to '削除', category_path(category.id), method: :delete %>
+  <% if category.category_list_id == 0 %>
+    <%= link_to '編集', edit_category_path(category.id) %>
     <%= category.name %>
+  <% else %>
+    <%= category.category_list.name %>
   <% end %>
 </div>
 

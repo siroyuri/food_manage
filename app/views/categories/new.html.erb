@@ -2,7 +2,7 @@
   <h3>カテゴリー追加</h3>
 </div>
 
-<%= form_with mofel: @category, url: categories_path, remote: true do |input_f| %>
+<%= form_with model: @category, url: categories_path, remote: true do |input_f| %>
   <div>
     <%= input_f.text_area :name, placeholder: "10文字以内", maxlength: 10, id: "js_input_field" %>
     <%= input_f.submit '追加' %>
@@ -18,6 +18,6 @@
 
   <div>
     <div id="js_input_category"></div>
-    <%= select_f.submit '追加' %>
+    <%= select_f.submit '完了' %>
   </div>
 <% end %>
