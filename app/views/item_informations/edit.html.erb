@@ -1,6 +1,4 @@
 <%= form_with model: @info, local: true do |f| %>
-  <%= f.hidden_field :item_id %>
-
   <%= f.text_field :name, placeholder: "名前(20文字以内)", maxlength: "20", value: @item.name,  disabled: true %>
   <%= f.number_field :quantity, step: "0.5", placeholder: "数量(0.5単位)" %>
   <%= f.text_field :unit, placeholder: "単位", value: @item.unit, disabled: true %>

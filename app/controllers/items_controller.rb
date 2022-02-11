@@ -15,10 +15,11 @@ class ItemsController < ApplicationController
   end
 
   def create
-    if ItemWithInformation.singular_save(item_with_information_params)
+    @item = ItemWithInformation.new(item_with_information_params)
+    if @item.save
       flash[:success] = "保存に成功しました"
     else
-      flash[:error] = "保存に失敗しました"
+      flash[:error] = @item.errors.full_messages
     end
     redirect_to root_path
   end
@@ -64,7 +65,7 @@ class ItemsController < ApplicationController
   end
 
   def item_with_information_params
-    params.require(:item_with_information).permit(:name, :unit, :quantity_total, :category_id, :deadline, :purchase_date, :quantity, :is_frozen, :item_id).merge(user_id: current_user.id)
+    params.require(:item_with_information).permit(:name, :unit, :category_id, :deadline, :purchase_date, :quantity, :is_frozen).merge(user_id: current_user.id)
   end
 
   def item_params

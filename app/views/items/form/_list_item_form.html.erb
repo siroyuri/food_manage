@@ -7,20 +7,6 @@
       <%= button_to item.name, value_input_item_path(item.id), { method: :get, remote: true } %>
     </div>
   <% end %>
-  <%= form_with model: item, url: items_path, local: true do |f| %>
-  <div id="js_item_form_box">
-    <%= f.hidden_field :category_id, id: "category_id", readonly: true %>
-    <%= f.hidden_field :item_id, id: "item_id", readonly: true %>
-
-    <%= f.check_box :is_frozen, {}, "true", "false" %>
-    <%= f.text_field :name, placeholder: "名前(20文字以内)", maxlength: "20", id: "name", readonly: true %>
-    <%= f.number_field :quantity, step: "0.5", placeholder: "数量(0.5単位)" %>
-    <%= f.text_field :unit, placeholder: "単位", id: "unit", readonly: true %>
-    <%= f.label :deadline %>
-    <%= f.date_field(:deadline, {}) %>
-    <%= f.label :purchase_date %>
-    <%= f.date_field(:purchase_date, {value: Time.now.strftime("%Y-%m-%d")}) %>
-
-    <%= f.submit '送信' %>
-  <% end %>
+  
+  <%= render 'items/form/item_form', item: item, category_id: category_id %>
 </div>
