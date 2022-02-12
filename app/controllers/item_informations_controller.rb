@@ -1,13 +1,18 @@
 class ItemInformationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_info, only: [:edit, :update, :destroy]
+  before_action :set_item, only: [:edit, :update]
 
   def edit
-    @item = Item.find(@info.item_id)
   end
 
   def update
-    @info.update(info_params)
+    @item_with_information = ItemWithInformation.new(update_params)
+    if @item_with_information.update(@info, @item)
+      flash[:success] = "編集が完了しました"
+    else
+      flash[:error] = "編集に失敗しました"
+    end
     redirect_to root_path
   end
 
@@ -22,7 +27,11 @@ class ItemInformationsController < ApplicationController
     @info = ItemInformation.find(params[:id])
   end
 
-  def info_params
-    params.require(:item_information).permit(:item_id, :quantity, :deadline, :purchase_date).merge(user_id: current_user.id)
+  def set_item
+    @item = Item.find(@info.item_id)
+  end
+
+  def update_params
+    params.require(:item_information).permit(:name, :unit, :category_id, :deadline, :purchase_date, :quantity, :is_frozen).merge(user_id: current_user.id)
   end
 end

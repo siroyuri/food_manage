@@ -7,7 +7,6 @@ Rails.application.routes.draw do
       get :value_input
       get :add_form
       get :remove_form
-      get :switching_forms
     end
   end
   resources :item_informations, only: [:edit, :update, :destroy]

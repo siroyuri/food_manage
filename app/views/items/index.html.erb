@@ -8,9 +8,14 @@
   <div><%= link_to "新規登録", new_user_registration_path %></div>
 <% end %>
 
-<% if flash[:success] || flash[:error] %>
+<% if flash[:success] %>
   <div><%= flash[:success] %></div>
-  <div><%= flash[:error] %></div>
+<% elsif flash[:error] %>
+ <div>
+    <% flash[:error].each do |message| %>
+      ・<%= message %>
+    <% end %>
+  </div>
 <% end %>
 
 <%= render partial: 'items/top_page/category', collection: @categories, as: 'category' %>
