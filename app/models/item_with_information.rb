@@ -21,4 +21,15 @@ class ItemWithInformation
   rescue ActiveRecord::RecordInvalid
     false
   end
+
+  def update(info, item)
+    return if invalid?
+
+    ActiveRecord::Base.transaction do
+      item.update(name: name, unit: unit, category_id: category_id, user_id: user_id)
+      info.update(deadline: deadline, purchase_date: purchase_date, quantity: quantity, is_frozen: is_frozen, item_id: item.id, user_id: user_id)
+    end
+  rescue ActiveRecord::RecordInvalid
+    false
+  end
 end
