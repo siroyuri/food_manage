@@ -21,6 +21,11 @@ class ItemInformationsController < ApplicationController
     redirect_to root_path
   end
 
+  def is_frozen
+    @info = ItemInformation.find(params[:id])
+    @info.update(is_frozen: params[:is_frozen])
+  end
+
   private
 
   def set_info
