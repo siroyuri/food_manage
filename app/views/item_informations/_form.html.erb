@@ -1,0 +1,23 @@
+<div>
+  <% if category.category_list_id == 0 %>
+    <%= category.name %>
+  <% else %>
+    <%= category.category_list.name %>
+  <% end %>
+
+  <div class="informations_form">
+    <%= f.fields_for :informations do |ff| %>
+      <%= ff.hidden_field :category_id, value: category.id %>
+
+      <label class="is_frozen">
+        <%= ff.check_box :is_frozen, { id:"check_box" }, "true", "false" %>
+        <%= image_tag("frozen.png", class:"frozen_image grayscale") %>
+      </label>
+      <%= ff.text_field :name, placeholder: "名前(20文字以内)", maxlength: "20" %>
+      <%= ff.number_field :quantity, step: "0.5", placeholder: "数量(0.5単位)" %>
+      <%= ff.text_field :unit, placeholder: "単位" %>
+      <%= ff.label :deadline %>
+      <%= ff.date_field(:deadline, {}) %>
+    <% end %>
+  </div>
+</div>

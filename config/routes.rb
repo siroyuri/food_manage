@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       get :remove_form
     end
   end
-  resources :item_informations, only: [:edit, :update, :destroy] do
+  resources :item_informations, only: [:new, :create, :edit, :update, :destroy] do
     member do
       post :is_frozen
     end
