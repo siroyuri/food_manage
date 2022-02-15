@@ -9,6 +9,7 @@ require("jquery")
 require("@rails/activestorage").start()
 require("channels")
 require("../is_frozen")
+require("../informations_form")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

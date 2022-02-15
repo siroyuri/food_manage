@@ -1,6 +1,6 @@
 class Form::ItemCollection < Form::Base
   FORM_COUNT = 1
-  attr_accessor :informations, :purchase_date, :user_id
+  attr_accessor :informations
 
   def initialize(attributes = {})
     super attributes
