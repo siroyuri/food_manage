@@ -3,12 +3,10 @@ class ItemWithInformation
   attr_accessor :name, :unit, :category_id, :user_id, :deadline, :purchase_date, :quantity, :is_frozen
 
   with_options presence: true do
-    validates :name, :category_id, :user_id
+    validates :name, :category_id, :user_id, :quantity, :purchase_date
   end
   validates :name, length: { maximum: 20 }
-  with_options allow_blank: true do
-    validates :quantity, numericality: { greater_than: 0 }
-  end
+  validates :quantity, numericality: { greater_than: 0, message: "is invalid" }, allow_blank: true
   validates :is_frozen, inclusion: { in: ["true", "false"] }
 
   def save
