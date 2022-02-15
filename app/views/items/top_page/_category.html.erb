@@ -1,18 +1,20 @@
-<div>
-  <%= link_to '削除', category_path(category.id), method: :delete %>
-  <% if category.category_list_id == 0 %>
-    <%= link_to '編集', edit_category_path(category.id) %>
-    <%= category.name %>
-  <% else %>
-    <%= category.category_list.name %>
-  <% end %>
-</div>
+<div id="js_<%= category.id %>_wrap">
+  <div>
+    <%= link_to '削除', category_path(category.id), class:"js_delete_btn", id: "js_#{category.id}", method: :delete, remote: true %>
+    <% if category.category_list_id == 0 %>
+      <%= link_to '編集', edit_category_path(category.id) %>
+      <%= category.name %>
+    <% else %>
+      <%= category.category_list.name %>
+    <% end %>
+  </div>
 
-<div id="js_item_new_or_list_<%= category.id %>">
-  <%= render 'items/form/add_item_form_btn', category_id: category.id %>
-</div>
+  <div id="js_item_new_or_list_<%= category.id %>">
+    <%= render 'items/form/add_item_form_btn', category_id: category.id %>
+  </div>
 
-<div>
-  <%= render partial: 'items/top_page/multi_item', collection: @multi_items, as: 'items', locals: { category_id: category.id } %>
-  <%= render partial: 'items/top_page/single_item', collection: @single_items, as: 'item', locals: { category_id: category.id } %>
+  <div>
+    <%= render partial: 'items/top_page/multi_item', collection: @multi_items, as: 'items', locals: { category_id: category.id } %>
+    <%= render partial: 'items/top_page/single_item', collection: @single_items, as: 'item', locals: { category_id: category.id } %>
+  </div>
 </div>

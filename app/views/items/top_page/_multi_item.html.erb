@@ -1,6 +1,6 @@
 <% if category_id == items.category_id %>
-<div>
-  <%= link_to '削除', item_path(items.id), method: :delete %>
+<div id="js_<%= category_id %>_<%= items.id %>_wrap">
+  <%= link_to '削除', item_path(items.id), class:"js_delete_btn", id: "js_#{category_id}_#{items.id}", method: :delete, remote: true %>
   <%= link_to '編集', edit_item_path(items.id) %>
   <%= items.name %>:
   <% @sum_quantities.each do |sum_quantity| %>

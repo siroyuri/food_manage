@@ -33,7 +33,6 @@ class ItemInformationsController < ApplicationController
 
   def destroy
     @info.destroy
-    redirect_to root_path
   end
 
   def is_frozen

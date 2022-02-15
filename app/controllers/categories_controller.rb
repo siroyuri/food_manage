@@ -41,10 +41,6 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
-    respond_to do |format|
-      format.html { redirect_to root_path }
-      format.js { @category_id = params[:id] }
-    end
   end
 
   private
