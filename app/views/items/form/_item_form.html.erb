@@ -1,4 +1,13 @@
-<%= form_with model: item, url: items_path, local: true do |f| %>
+<div class="js_item_form">
+  <div id="category_id" hidden><%= category_id %></div>
+  <%= button_to '追加をやめる', remove_form_item_path(category_id), { method: :get, remote: :true } %>
+  <% items.each do |item| %>
+    <div>
+      <%= button_to item.name, value_input_item_path(item.id), { method: :get, remote: true } %>
+    </div>
+  <% end %>
+  
+  <%= form_with model: item, url: items_path, local: true do |f| %>
   <div id="js_item_form_box">
     <%= f.hidden_field :category_id, value: category_id, id: "category_id" %>
 
@@ -14,3 +23,5 @@
     <%= f.submit '送信' %>
   </div>
 <% end %>
+
+</div>
