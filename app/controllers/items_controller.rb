@@ -5,13 +5,10 @@ class ItemsController < ApplicationController
   before_action :set_items, only: [:add_form]
   
   def index
-    @categories = current_user.categories.order("category_list_id ASC")
-    @item = ItemWithInformation.new
+    @categories = current_user.categories.order("category_list_id ASC").all.includes(items: [:item_informations])
     sql1 = "SELECT item_id, SUM(quantity) AS quantity_total FROM item_informations WHERE user_id = #{current_user.id} GROUP BY item_id HAVING COUNT(item_id) > 1"
     @sum_quantities = ItemInformation.find_by_sql(sql1)
-    @multi_items = Item.where(id: @sum_quantities.pluck(:item_id)).includes(:item_informations).order("category_id ASC")
-    sql2 = "SELECT * FROM items WHERE id IN (SELECT item_id FROM item_informations WHERE user_id = #{current_user.id} GROUP BY item_id HAVING COUNT(item_id) = 1)"
-    @single_items = Item.find_by_sql(sql2)
+    @item = ItemWithInformation.new
   end
 
   def create

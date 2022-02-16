@@ -1,5 +1,7 @@
-<% if info.is_frozen %>
-  <%= link_to image_tag("frozen.png", class:"frozen_image"), is_frozen_item_information_path(info.id, is_frozen: "false"), method: :post, remote: true %>
-<% else %>
-<%= link_to image_tag("frozen.png", class:"frozen_image grayscale"), is_frozen_item_information_path(info.id, is_frozen: "true"), method: :post, remote: true %>
-<% end %>
+<div id="is_frozen_<%= info.id %>">
+  <% if info.is_frozen %>
+    <%= link_to image_tag("frozen.png", class:"frozen_image"), is_frozen_item_information_path(info.id, is_frozen: "false"), method: :post, remote: true %>
+  <% else %>
+  <%= link_to image_tag("frozen.png", class:"frozen_image grayscale"), is_frozen_item_information_path(info.id, is_frozen: "true"), method: :post, remote: true %>
+  <% end %>
+</div>

@@ -1,8 +1,0 @@
-<% if category_id == item.category_id %>
-<div id="js_<%= category_id %>_<%= item.id %>_wrap">
-  <%= link_to '削除', item_path(item.id), class:"js_delete_btn", id: "js_#{category_id}_#{item.id}", method: :delete, remote: true %>
-  <%= link_to '編集', edit_item_path(item.id) %>
-  <%= item.name %>:
-  <%= render partial: 'items/top_page/item_information', collection: item.item_informations, as: 'info', locals: { unit: item.unit } %>
-</div>
-<% end %>

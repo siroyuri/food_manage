@@ -1,0 +1,29 @@
+<div id="js_<%= item.id %>_item_wrap">
+<% if item.item_informations.present? %>
+  <%= link_to '削除', item_path(item.id), class:"js_delete_btn", id: "js_#{item.id}_item", method: :delete, remote: true %>
+  <%= link_to '編集', edit_item_path(item.id) %>
+
+  <% if item.item_informations.length == 1 %>
+    <%= item.name %>:
+
+  <% else %>
+
+      <%= item.name %>:
+      <% @sum_quantities.each do |sum_quantity| %>
+      <% if item.id == sum_quantity.item_id %>
+
+        <% if sum_quantity.quantity_total % 1 == 0 %>
+          <%= sum_quantity.quantity_total.floor %>
+        <% else %>
+          <%= sum_quantity.quantity_total %>
+        <% end %>
+        <%= item.unit %>
+
+      <% end %><%# if.id=id %>
+      <% end %><%# sum_quantity %>
+  <% end %><%# if.length>1 %>
+
+  <%= render partial: 'items/top_page/item_information', collection: item.item_informations, as: "info", locals: { unit: item.unit } %>
+
+<% end %><%# if.present? %>
+</div>
