@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:edit, :update, :destroy, :value_input]
+  before_action :set_item, only: [:destroy, :value_input]
   before_action :set_category_id, only: [:add_form, :remove_form]
   before_action :set_items, only: [:add_form]
   
@@ -17,18 +17,6 @@ class ItemsController < ApplicationController
       flash[:success] = "保存に成功しました"
     else
       flash[:error] = @item.errors.full_messages
-    end
-    redirect_to root_path
-  end
-
-  def edit
-  end
-
-  def update
-    if @item.update(update_params)
-      flash[:success] = "編集が完了しました"
-    else
-      flash[:error] = "編集に失敗しました"
     end
     redirect_to root_path
   end

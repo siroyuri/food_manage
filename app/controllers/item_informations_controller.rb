@@ -26,7 +26,7 @@ class ItemInformationsController < ApplicationController
     if @item_with_information.update(@info, @item)
       flash[:success] = "編集が完了しました"
     else
-      flash[:error] = "編集に失敗しました"
+      flash[:error] = ["編集に失敗しました"]
     end
     redirect_to root_path
   end

@@ -1,7 +1,6 @@
 <div id="js_<%= item.id %>_item_wrap">
 <% if item.item_informations.present? %>
   <%= link_to '削除', item_path(item.id), class:"js_delete_btn", id: "js_#{item.id}_item", method: :delete, remote: true %>
-  <%= link_to '編集', edit_item_path(item.id) %>
 
   <% if item.item_informations.length == 1 %>
     <%= item.name %>:
