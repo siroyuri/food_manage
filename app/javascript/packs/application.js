@@ -11,6 +11,7 @@ require("channels")
 require("../is_frozen")
 require("../informations_form")
 require("../delete_btn")
+require("../informations_form_value_input")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

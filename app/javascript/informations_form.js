@@ -1,5 +1,5 @@
 $(function () {
-  $('body').on('click', '#add_informations_form', function (e) {
+  $('body').on('click', '#js_add_informations_form', function (e) {
     e.preventDefault();
     var addBtnParent = $(this).parent();
     var cloneForm = $(`#${addBtnParent.attr('id')}_informations_form`).clone(true);
