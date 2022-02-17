@@ -24,8 +24,14 @@ class ItemWithInformation
     return if invalid?
 
     ActiveRecord::Base.transaction do
-      item.update(name: name, unit: unit, category_id: category_id, user_id: user_id)
-      info.update(deadline: deadline, purchase_date: purchase_date, quantity: quantity, is_frozen: is_frozen, item_id: item.id, user_id: user_id)
+      if Item.where(name: name, unit: unit, category_id: category_id, user_id: user_id).exists?
+        item_exist = Item.where(name: name, unit: unit, category_id: category_id, user_id: user_id)
+        info.update(deadline: deadline, purchase_date: purchase_date, quantity: quantity, is_frozen: is_frozen, item_id: item_exist.ids.join, user_id: user_id)
+        item.destroy
+      else
+        item.update(name: name, unit: unit, category_id: category_id, user_id: user_id)
+        info.update(deadline: deadline, purchase_date: purchase_date, quantity: quantity, is_frozen: is_frozen, item_id: item.id, user_id: user_id)
+      end
     end
   rescue ActiveRecord::RecordInvalid
     false

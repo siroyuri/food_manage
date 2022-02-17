@@ -1,15 +1,16 @@
 <div>
-  <%= link_to '削除', item_information_path(info.id), method: :delete %>
+  <%= link_to '削除', item_information_path(info.id), method: :delete, remote: true %>
   <%= link_to '編集', edit_item_information_path(info.id) %>
-  <div id="is_frozen_<%= info.id %>">
-    <%= render 'items/top_page/is_frozen', info: info %>
-  </div>
+
+  <%= render 'items/top_page/is_frozen', info: info %>
+
+  <%= item.name %>:
   <% if info.quantity % 1 == 0 %>
     <%= info.quantity.floor %>
   <% else %>
     <%= info.quantity %>
   <% end %>
-    <%= unit %>:
+    <%= item.unit %>:
   <% if info.deadline.present? %>
     <%= info.deadline %>
   <% else %>

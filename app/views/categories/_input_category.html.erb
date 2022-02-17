@@ -1,4 +1,4 @@
-<div id="js_input_category_<%= input_category.id %>">
-  <%= link_to '−', category_path(input_category.id), method: :delete, remote: true %>
+<div id="js_input_category_<%= input_category.id %>_wrap">
+  <%= link_to '−', category_path(input_category.id), class:"js_delete_btn", id: "js_input_category_#{input_category.id}", method: :delete, remote: true %>
   <%= input_category.name %>
 </div>

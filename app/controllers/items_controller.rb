@@ -1,17 +1,14 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:edit, :update, :destroy, :value_input]
+  before_action :set_item, only: [:destroy, :value_input]
   before_action :set_category_id, only: [:add_form, :remove_form]
   before_action :set_items, only: [:add_form]
   
   def index
-    @categories = current_user.categories.order("category_list_id ASC")
-    @item = ItemWithInformation.new
+    @categories = current_user.categories.order("category_list_id ASC").all.includes(items: [:item_informations])
     sql1 = "SELECT item_id, SUM(quantity) AS quantity_total FROM item_informations WHERE user_id = #{current_user.id} GROUP BY item_id HAVING COUNT(item_id) > 1"
     @sum_quantities = ItemInformation.find_by_sql(sql1)
-    @multi_items = Item.where(id: @sum_quantities.pluck(:item_id)).includes(:item_informations).order("category_id ASC")
-    sql2 = "SELECT * FROM items WHERE id IN (SELECT item_id FROM item_informations WHERE user_id = #{current_user.id} GROUP BY item_id HAVING COUNT(item_id) = 1)"
-    @single_items = Item.find_by_sql(sql2)
+    @item = ItemWithInformation.new
   end
 
   def create
@@ -24,21 +21,8 @@ class ItemsController < ApplicationController
     redirect_to root_path
   end
 
-  def edit
-  end
-
-  def update
-    if @item.update(update_params)
-      flash[:success] = "編集が完了しました"
-    else
-      flash[:error] = "編集に失敗しました"
-    end
-    redirect_to root_path
-  end
-
   def destroy
     @item.destroy
-    redirect_to root_path
   end
 
   def value_input
