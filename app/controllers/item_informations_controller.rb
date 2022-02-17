@@ -1,7 +1,6 @@
 class ItemInformationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_info, only: [:edit, :update, :destroy]
-  before_action :set_item, only: [:edit, :update]
+  before_action :set_item_data, only: [:edit, :update, :destroy]
 
   def new
     @item = Form::ItemCollection.new
@@ -33,6 +32,8 @@ class ItemInformationsController < ApplicationController
 
   def destroy
     @info.destroy
+    sql1 = "SELECT item_id, SUM(quantity) AS quantity_total FROM item_informations WHERE user_id = #{current_user.id} AND item_id = #{@item.id}"
+    @sum_quantities = ItemInformation.find_by_sql(sql1)
   end
 
   def is_frozen
@@ -42,11 +43,8 @@ class ItemInformationsController < ApplicationController
 
   private
 
-  def set_info
+  def set_item_data
     @info = ItemInformation.find(params[:id])
-  end
-
-  def set_item
     @item = Item.find(@info.item_id)
   end
 
