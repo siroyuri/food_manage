@@ -1,8 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:destroy, :value_input]
   before_action :set_category_id, only: [:add_form, :remove_form]
-  before_action :set_items, only: [:add_form]
   
   def index
     @categories = current_user.categories.order("category_list_id ASC").all.includes(items: [:item_informations])
@@ -22,13 +20,13 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    @item = Item.find(params[:id])
     @item.destroy
   end
 
-  def value_input
-  end
-
   def add_form
+    @item = ItemWithInformation.new
+    @items = current_user.items.where(category_id: @category_id)
   end
 
   def remove_form
@@ -36,17 +34,8 @@ class ItemsController < ApplicationController
 
   private
 
-  def set_item
-    @item = Item.find(params[:id])
-  end
-
   def set_category_id
     @category_id = params[:id]
-  end
-
-  def set_items
-    @item = ItemWithInformation.new
-    @items = current_user.items.where(category_id: @category_id).includes(:item_informations)
   end
 
   def item_with_information_params
