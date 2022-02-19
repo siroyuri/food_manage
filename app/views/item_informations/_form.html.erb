@@ -6,14 +6,14 @@
   <% end %>
 
   <div class="informations_form" id="js_<%= category.id %>_informations_form">
+    <div class="js_item_list_btn_box">
     <% category.items.each do |item| %>
-    <div>
       <button class="js_item_list_btn">
         <span id="list_btn_name"><%= item.name %></span>
         <span id="list_btn_unit" hidden><%= item.unit %></span>
       </button>
-    </div>
     <% end %>
+    </div>
     <%= f.fields_for :informations do |ff| %>
       <%= ff.hidden_field :category_id, value: category.id, id:"category_id" %>
 
