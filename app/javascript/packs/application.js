@@ -12,6 +12,7 @@ require("../is_frozen")
 require("../informations_form")
 require("../delete_btn")
 require("../item_list_btn")
+require("../new_category")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

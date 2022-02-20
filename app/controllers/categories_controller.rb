@@ -9,25 +9,21 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    respond_to do |format|
-      format.html {
-        if params[:category].present?
-          if Category.save_from_list(category_list_params)
-            flash[:success] = "保存に成功しました"
-          else
-            flash[:error] = "保存に失敗しました"
-          end
-          redirect_to root_path
-        else
-          redirect_to root_path
-        end
-                  }
+    if params[:category].present?
+      @category = Category.save_list(category_params)
 
-      format.js {
-        if params[:category][:name].present?
-          @new_category = Category.create(category_input_params)
-        end
-       }
+      respond_to do |format|
+        format.html {
+            if @category == false
+              flash[:error] = ["保存に失敗しました"]
+            else
+              flash[:success] = "保存に成功しました"
+            end
+            redirect_to root_path
+        }
+  
+        format.js {}
+      end
     end
   end
 
@@ -45,6 +41,7 @@ class CategoriesController < ApplicationController
 
   private
 
+
   def set_category
     @category = Category.find(params[:id])
   end
@@ -52,8 +49,8 @@ class CategoriesController < ApplicationController
   def category_input_params
     params.require(:category).permit(:name).merge(category_list_id: 0, user_id: current_user.id)
   end
-
-  def category_list_params
-    params.require(:category).permit(category_list_id: []).merge(user_id: current_user.id, name: "")
+  
+  def category_params
+    params.require(:category).permit(category_lists: [:category_list_id, :name]).merge(user_id: current_user.id)
   end
 end

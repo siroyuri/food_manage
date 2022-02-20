@@ -4,11 +4,13 @@ class ItemInformationsController < ApplicationController
 
   def new
     @item = Form::ItemCollection.new
+    @category = Category.new
     @categories = current_user.categories.order("category_list_id ASC").includes(:items)
+    category_list_id = @categories.pluck(:category_list_id).uniq
+    @category_list = CategoryList.where.not(id: category_list_id)
   end
 
   def create
-    binding.pry
     @item = Form::ItemCollection.new(item_collection_params)
     if @item.save(params[:form_item_collection][:purchase_date], current_user.id)
       flash[:success] = "保存に成功しました"

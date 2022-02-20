@@ -22,13 +22,17 @@ class Category < ApplicationRecord
     category_list_id == 0
   end
 
-  def self.save_from_list(params)
-    Category.transaction do
-      params[:category_list_id].each do |category_list_id|
-        Category.create!(name: params[:name], category_list_id: category_list_id, user_id: params[:user_id])
+  def self.save_list(params)
+    categories = []
+    ActiveRecord::Base.transaction do
+      params[:category_lists].each do |p|
+        category = Category.new(p)
+        category[:user_id] = params[:user_id]
+        category.save!
+        categories << category
       end
     end
-      return true
+      return categories
     rescue => e
       return false
   end

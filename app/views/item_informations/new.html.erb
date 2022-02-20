@@ -1,7 +1,24 @@
 <div>
-<%= form_with model: @item, url:item_informations_path, local: true do |f| %>
-  <%= f.label :purchase_date %>
-  <%= f.date_field(:purchase_date, {value: Time.now.strftime("%Y-%m-%d")}) %>
-  <%= render partial: 'form', collection: @categories, as: 'category', locals: { f: f } %>
-  <%= f.submit '送信' %>
-<% end %>
+  <%= form_with model: @item, url:item_informations_path, local: true do |f| %>
+    <%= f.label :purchase_date %>
+    <%= f.date_field(:purchase_date, {value: Time.now.strftime("%Y-%m-%d")}) %>
+
+    <%= render partial: 'form', collection: @categories, as: 'category', locals: { f: f } %>
+
+    <div>＋カテゴリーを追加</div>
+
+    <%= f.submit '送信' %>
+  <% end %>
+
+  <div>
+    <div>
+      <input type="text" maxlength="10" id="js_input_category_name">
+      <button id="js_category_name_submit">追加</button>
+    </div>
+
+    <%= form_with model: @category, url: categories_path, remote: true do |f| %>
+      <%= render 'categories/new_form', f: f %>
+    <% end %>
+  </div>
+
+</div>
