@@ -1,5 +1,5 @@
 $(function () {
-  $('body').on('click', '#add_informations_form', function (e) {
+  $('body').on('click', '#js_add_informations_form', function (e) {
     e.preventDefault();
     var addBtnParent = $(this).parent();
     var cloneForm = $(`#${addBtnParent.attr('id')}_informations_form`).clone(true);
@@ -8,6 +8,7 @@ $(function () {
     var removeBtn = `<a class="js_delete_btn" id="js_${dateNow}_form">−フォームを削除</a>`
   
     cloneForm.attr('id', `js_${dateNow}_form_wrap`);
+    cloneForm.find('.js_item_list_btn_box').hide();
     cloneForm.find('#category_id').attr('name', `${formName}[category_id]`);
     var checkBox = cloneForm.find('#check_box')
     checkBox.prop('checked', false).attr('name', `${formName}[is_frozen]`);

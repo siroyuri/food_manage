@@ -4,7 +4,7 @@ class ItemInformationsController < ApplicationController
 
   def new
     @item = Form::ItemCollection.new
-    @categories = current_user.categories.order("category_list_id ASC")
+    @categories = current_user.categories.order("category_list_id ASC").includes(:items)
   end
 
   def create
@@ -39,6 +39,13 @@ class ItemInformationsController < ApplicationController
   def is_frozen
     @info = ItemInformation.find(params[:id])
     @info.update(is_frozen: params[:is_frozen])
+  end
+
+  def new_category
+    @category = Category.new
+    @categories = current_user.categories.order("category_list_id ASC").includes(:items)
+    category_list_id = @categories.pluck(:category_list_id).uniq
+    @category_list = CategoryList.where.not(id: category_list_id)
   end
 
   private

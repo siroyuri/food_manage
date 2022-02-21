@@ -1,11 +1,21 @@
 <div>
-  <% if category.category_list_id == 0 %>
-    <%= category.name %>
-  <% else %>
-    <%= category.category_list.name %>
-  <% end %>
+  <div>
+    <% if category.category_list_id == 0 %>
+      <%= category.name %>
+    <% else %>
+      <%= category.category_list.name %>
+    <% end %>
+  </div>
 
   <div class="informations_form" id="js_<%= category.id %>_informations_form">
+    <div class="js_item_list_btn_box">
+    <% category.items.each do |item| %>
+      <button class="js_item_list_btn">
+        <span id="list_btn_name"><%= item.name %></span>
+        <span id="list_btn_unit" hidden><%= item.unit %></span>
+      </button>
+    <% end %>
+    </div>
     <%= f.fields_for :informations do |ff| %>
       <%= ff.hidden_field :category_id, value: category.id, id:"category_id" %>
 
@@ -20,7 +30,7 @@
       <%= ff.date_field(:deadline, { id: "deadline" }) %>
     <% end %>
   </div>
-  <div id=js_<%= category.id %>>
-    <%= link_to "＋別の食材を追加", "#", id: "add_informations_form" %>
+  <div id="js_<%= category.id %>">
+    <%= link_to "＋別の食材を追加", "#", id: "js_add_informations_form" %>
   </div>
 </div>

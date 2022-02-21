@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   resources :categories, only: [:new, :create, :edit, :update, :destroy]
   resources :items, only: [:index, :create, :destroy] do
     member do
-      get :value_input
       get :add_form
       get :remove_form
     end
@@ -12,6 +11,9 @@ Rails.application.routes.draw do
   resources :item_informations, only: [:new, :create, :edit, :update, :destroy] do
     member do
       post :is_frozen
+    end
+    collection do
+      get :new_category
     end
   end
 end

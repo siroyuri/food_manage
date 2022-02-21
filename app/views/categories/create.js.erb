@@ -1,4 +1,34 @@
 $(function () {
-  $('#js_input_category').append("<%= j(render 'input_category', input_category: @new_category)%>");
-  $('#js_input_field').val("");
+  <% if @new_category.present? %>
+    <% @new_category.each do |category| %>
+      var categoryId = "<%= category.id %>"
+      var categoryName =  <% if category.name == "" %>
+                            "<%= category.category_list.name %>"
+                          <% else %>
+                            "<%= category.name %>"
+                          <% end %>
+      console.log(categoryId);
+      console.log(categoryName);
+
+      var cloneCategory = $('#clone_category').clone(true);
+      var dateNow = jQuery.now();
+      var formName = `form_item_collection[informations_attributes][${dateNow}]`
+
+      cloneCategory.find('#category_name').text(categoryName);
+      cloneCategory.find('.informations_form').attr('id', `js_${dateNow}_informations_form`);
+      cloneCategory.find('#category_id').attr('name', `${formName}[category_id]`).val(categoryId);
+      var checkBox = cloneCategory.find('#check_box');
+      checkBox.attr('name', `${formName}[is_frozen]`);
+      checkBox.prev().attr('name', `${formName}[is_frozen]`);
+      cloneCategory.find('#name').attr('name', `${formName}[name]`);
+      cloneCategory.find('#quantity').attr('name', `${formName}[quantity]`);
+      cloneCategory.find('#unit').attr('name', `${formName}[unit]`);
+      cloneCategory.find('#deadline').attr('name', `${formName}[deadline]`);
+      cloneCategory.find('.add_btn_wrap').attr('id', `js_${dateNow}`);
+      cloneCategory.removeAttr('id').removeClass('hidden');
+
+      $('#item_informations_form_wrap').append(cloneCategory);
+    <% end %>
+  <% end %>
+  $('#category_list_wrap').empty();
 });
