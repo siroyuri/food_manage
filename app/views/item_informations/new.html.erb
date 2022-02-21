@@ -30,20 +30,13 @@
       </div>
     </div>
 
-    <div id="js_category_list_render">＋カテゴリーを追加</div>
+    <div id="js_category_list_render">
+      <%= link_to "＋カテゴリーを追加", new_category_item_informations_path, remote: true %>
+    </div>
 
     <%= f.submit '送信' %>
   <% end %>
 
-  <div id="category_list_wrap">
-    <div>
-      <input type="text" maxlength="10" id="js_input_category_name">
-      <button id="js_category_name_submit">追加</button>
-    </div>
-
-    <%= form_with model: @category, url: categories_path, remote: true do |f| %>
-      <%= render 'categories/new_form', f: f, category_list: @category_list %>
-    <% end %>
-  </div>
+  <div id="category_list_wrap"></div>
 
 </div>

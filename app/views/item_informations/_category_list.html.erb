@@ -1,0 +1,8 @@
+<div>
+  <input type="text" maxlength="10" id="js_input_category_name">
+  <button id="js_category_name_submit">追加</button>
+</div>
+
+<%= form_with model: category, url: categories_path, remote: true do |f| %>
+  <%= render 'categories/new_form', f: f, category_list: category_list %>
+<% end %>

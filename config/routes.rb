@@ -12,5 +12,8 @@ Rails.application.routes.draw do
     member do
       post :is_frozen
     end
+    collection do
+      get :new_category
+    end
   end
 end
