@@ -11,10 +11,11 @@ const buildHtml = (name) => {
 
 $(function () {
   $('#js_category_name_submit').on('click', function () {
-    var name = $(this).prev().val()
-    if (name != "") {
-      $('#js_category_checkbox_field').append(buildHtml(name));
+    var name = $(this).prev()
+    if (name.val() != "") {
+      $('#js_category_checkbox_field').append(buildHtml(name.val()));
     };
+    name.val('');
   });
 
   $('body').on('click', '#category_checkbox', function () {

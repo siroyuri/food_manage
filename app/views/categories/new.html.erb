@@ -8,5 +8,5 @@
 </div>
 
 <%= form_with model: @category, url: categories_path, local: true do |f| %>
-  <%= render 'new_form', f: f %>
+  <%= render 'new_form', f: f, category_list: @category_list %>
 <% end %>

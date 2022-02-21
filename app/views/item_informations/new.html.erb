@@ -3,21 +3,46 @@
     <%= f.label :purchase_date %>
     <%= f.date_field(:purchase_date, {value: Time.now.strftime("%Y-%m-%d")}) %>
 
-    <%= render partial: 'form', collection: @categories, as: 'category', locals: { f: f } %>
+    <div id="item_informations_form_wrap">
+      <%= render partial: 'form', collection: @categories, as: 'category', locals: { f: f } %>
+    </div>
 
-    <div>＋カテゴリーを追加</div>
+    <div id="clone_category" class="hidden">
+      <div id="category_name"></div>
+
+      <div class="informations_form" id="clone_informations_form">
+        <%= f.fields_for :informations do |ff| %>
+          <%= ff.hidden_field :category_id, id:"category_id" %>
+
+          <label class="is_frozen">
+            <%= ff.check_box :is_frozen, { id: "check_box" }, "true", "false" %>
+            <%= image_tag("frozen.png", class:"frozen_image grayscale", id:"frozen_img") %>
+          </label>
+          <%= ff.text_field :name, placeholder: "名前(20文字以内)", maxlength: "20", id: "name" %>
+          <%= ff.number_field :quantity, step: "0.5", placeholder: "数量(0.5単位)", id: "quantity" %>
+          <%= ff.text_field :unit, placeholder: "単位", id: "unit" %>
+          <%= ff.label :deadline %>
+          <%= ff.date_field(:deadline, { id: "deadline" }) %>
+        <% end %>
+      </div>
+      <div class="add_btn_wrap" id="clone">
+        <%= link_to "＋別の食材を追加", "#", id: "js_add_informations_form" %>
+      </div>
+    </div>
+
+    <div id="js_category_list_render">＋カテゴリーを追加</div>
 
     <%= f.submit '送信' %>
   <% end %>
 
-  <div>
+  <div id="category_list_wrap">
     <div>
       <input type="text" maxlength="10" id="js_input_category_name">
       <button id="js_category_name_submit">追加</button>
     </div>
 
     <%= form_with model: @category, url: categories_path, remote: true do |f| %>
-      <%= render 'categories/new_form', f: f %>
+      <%= render 'categories/new_form', f: f, category_list: @category_list %>
     <% end %>
   </div>
 

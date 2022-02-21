@@ -1,9 +1,11 @@
 <div>
-  <% if category.category_list_id == 0 %>
-    <%= category.name %>
-  <% else %>
-    <%= category.category_list.name %>
-  <% end %>
+  <div>
+    <% if category.category_list_id == 0 %>
+      <%= category.name %>
+    <% else %>
+      <%= category.category_list.name %>
+    <% end %>
+  </div>
 
   <div class="informations_form" id="js_<%= category.id %>_informations_form">
     <div class="js_item_list_btn_box">
@@ -28,7 +30,7 @@
       <%= ff.date_field(:deadline, { id: "deadline" }) %>
     <% end %>
   </div>
-  <div id=js_<%= category.id %>>
+  <div id="js_<%= category.id %>">
     <%= link_to "＋別の食材を追加", "#", id: "js_add_informations_form" %>
   </div>
 </div>

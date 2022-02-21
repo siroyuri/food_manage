@@ -1,5 +1,5 @@
 <div id="js_category_checkbox_field">
-  <% @category_list.each do |list| %>
+  <% category_list.each do |list| %>
     <label>
       <%= f.check_box :category_list_id, {name: "category[category_lists][][category_list_id]", id: "category_checkbox"}, list.id, nil %>
       <%= f.check_box :name, {name: "category[category_lists][][name]", class: "hidden"}, "", nil %>
