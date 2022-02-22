@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :categories, dependent: :destroy
   has_many :items, dependent: :destroy
+  has_many :item_informations, dependent: :destroy
 
   validates :name, presence: true
 end
