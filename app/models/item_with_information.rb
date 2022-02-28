@@ -13,27 +13,33 @@ class ItemWithInformation
     return if invalid?
 
     ActiveRecord::Base.transaction do
-      item = Item.where(name: name, unit: unit, category_id: category_id, user_id: user_id).first_or_create
-      ItemInformation.create(deadline: deadline, purchase_date: purchase_date, quantity: quantity, is_frozen: is_frozen, item_id: item.id, user_id: user_id)
+      item = Item.find_or_create_by!(name: name, unit: unit, category_id: category_id, user_id: user_id)
+      ItemInformation.create!(deadline: deadline, purchase_date: purchase_date, quantity: quantity, is_frozen: is_frozen, item_id: item.id, user_id: user_id)
     end
+    return true
   rescue ActiveRecord::RecordInvalid
-    false
+    return false
   end
 
   def update(info, item)
     return if invalid?
 
     ActiveRecord::Base.transaction do
-      if Item.where(name: name, unit: unit, category_id: category_id, user_id: user_id).exists?
-        item_exist = Item.where(name: name, unit: unit, category_id: category_id, user_id: user_id)
-        info.update(deadline: deadline, purchase_date: purchase_date, quantity: quantity, is_frozen: is_frozen, item_id: item_exist.ids.join, user_id: user_id)
-        item.destroy
+      kari_item = Item.find_or_initialize_by(name: name, unit: unit, category_id: category_id, user_id: user_id)
+
+      if kari_item.new_record?
+        item.update!(name: name, unit: unit, category_id: category_id, user_id: user_id)
+        info.update!(deadline: deadline, purchase_date: purchase_date, quantity: quantity, is_frozen: is_frozen, item_id: item.id, user_id: user_id)
       else
-        item.update(name: name, unit: unit, category_id: category_id, user_id: user_id)
-        info.update(deadline: deadline, purchase_date: purchase_date, quantity: quantity, is_frozen: is_frozen, item_id: item.id, user_id: user_id)
+        info.update!(deadline: deadline, purchase_date: purchase_date, quantity: quantity, is_frozen: is_frozen, item_id: kari_item.id, user_id: user_id)
+
+        unless item.item_informations.exists?
+          item.destroy
+        end
       end
     end
+    return true
   rescue ActiveRecord::RecordInvalid
-    false
+    return false
   end
 end
