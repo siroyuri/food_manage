@@ -5,7 +5,8 @@ class ItemWithInformation
   with_options presence: true do
     validates :name, :category_id, :user_id, :quantity, :purchase_date
   end
-  validates :name, length: { maximum: 20 }
+  validates :name, length: { maximum: 10 }
+  validates :unit, length: { maximum: 3 }
   validates :quantity, numericality: { greater_than: 0, message: "is invalid" }, allow_blank: true
   validates :is_frozen, inclusion: { in: ["true", "false"] }
 
