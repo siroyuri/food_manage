@@ -28,10 +28,10 @@ RSpec.describe ItemWithInformation, type: :model do
         @item_with_information.valid?
         expect(@item_with_information.errors.full_messages).to include("Name can't be blank")
       end
-      it 'nameは20文字以内でないと登録出来ない' do
-        @item_with_information.name = '123456789012345678901'
+      it 'nameは10文字以内でないと登録出来ない' do
+        @item_with_information.name = '12345678901'
         @item_with_information.valid?
-        expect(@item_with_information.errors.full_messages).to include("Name is too long (maximum is 20 characters)")
+        expect(@item_with_information.errors.full_messages).to include("Name is too long (maximum is 10 characters)")
       end
       it 'quantityが空では登録できない' do
         @item_with_information.quantity = ''
@@ -42,6 +42,11 @@ RSpec.describe ItemWithInformation, type: :model do
         @item_with_information.quantity = 0
         @item_with_information.valid?
         expect(@item_with_information.errors.full_messages).to include("Quantity is invalid")
+      end
+      it 'unitは3文字以内でないと登録できない' do
+        @item_with_information.unit = '1234'
+        @item_with_information.valid?
+        expect(@item_with_information.errors.full_messages).to include("Unit is too long (maximum is 3 characters)")
       end
       it 'purchase_dateが空では登録できない' do
         @item_with_information.purchase_date = ''
