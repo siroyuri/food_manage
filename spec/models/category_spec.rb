@@ -24,19 +24,19 @@ RSpec.describe Category, type: :model do
       it 'nameに値の入力があると追加出来ない' do
         @category_non_zero.name = '1234567890'
         @category_non_zero.valid?
-        expect(@category_non_zero.errors.full_messages).to include("Name must be blank")
+        expect(@category_non_zero.errors.full_messages).to include("Nameは入力しないでください")
       end
       it 'category_list_idはリストのid（１〜１６）でないと追加出来ない' do
         @category_non_zero.category_list_id = "17"
         @category_non_zero.valid?
-        expect(@category_non_zero.errors.full_messages).to include("Category list is invalid")
+        expect(@category_non_zero.errors.full_messages).to include("Category listis invalid")
       end
       it 'category_list_idは同じ値を追加出来ない' do
         @category_non_zero.save
         @category_same_id = FactoryBot.build(:category)
         @category_same_id.user = @category_non_zero.user
         @category_same_id.valid?
-        expect(@category_same_id.errors.full_messages).to include("Category list has already exists")
+        expect(@category_same_id.errors.full_messages).to include("Category listhas already exists")
       end
     end
   end
@@ -59,12 +59,12 @@ RSpec.describe Category, type: :model do
       it 'nameが空だと追加出来ない' do
         @category_zero.name = ''
         @category_zero.valid?
-        expect(@category_zero.errors.full_messages).to include("Name can't be blank")
+        expect(@category_zero.errors.full_messages).to include("Nameを入力してください")
       end
       it 'nameは10文字以上だと追加出来ない' do
         @category_zero.name = '12345678901'
         @category_zero.valid?
-        expect(@category_zero.errors.full_messages).to include("Name is enter within 10 characters")
+        expect(@category_zero.errors.full_messages).to include("Nameis enter within 10 characters")
       end
     end
   end
@@ -74,17 +74,17 @@ RSpec.describe Category, type: :model do
       it 'category_list_idが空だと追加できない' do
         @category_non_zero.category_list_id = ''
         @category_non_zero.valid?
-        expect(@category_non_zero.errors.full_messages).to include("Category list can't be blank")
+        expect(@category_non_zero.errors.full_messages).to include("Category listを入力してください")
       end
       it 'category_list_idは数字以外を追加出来ない' do
         @category_non_zero.category_list_id = 'a'
         @category_non_zero.valid?
-        expect(@category_non_zero.errors.full_messages).to include("Category list is enter a number")
+        expect(@category_non_zero.errors.full_messages).to include("Category listis enter a number")
       end
       it 'userが紐づいていないと追加出来ない' do
         @category_non_zero.user = nil
         @category_non_zero.valid?
-        expect(@category_non_zero.errors.full_messages).to include("User must exist")
+        expect(@category_non_zero.errors.full_messages).to include("Userを入力してください")
       end
     end
   end

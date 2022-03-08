@@ -26,47 +26,47 @@ RSpec.describe ItemWithInformation, type: :model do
       it 'nameが空では登録できない' do
         @item_with_information.name = ''
         @item_with_information.valid?
-        expect(@item_with_information.errors.full_messages).to include("Name can't be blank")
+        expect(@item_with_information.errors.full_messages).to include("Nameを入力してください")
       end
       it 'nameは10文字以内でないと登録出来ない' do
         @item_with_information.name = '12345678901'
         @item_with_information.valid?
-        expect(@item_with_information.errors.full_messages).to include("Name is too long (maximum is 10 characters)")
+        expect(@item_with_information.errors.full_messages).to include("Nameは10文字以内で入力してください")
       end
       it 'quantityが空では登録できない' do
         @item_with_information.quantity = ''
         @item_with_information.valid?
-        expect(@item_with_information.errors.full_messages).to include("Quantity can't be blank")
+        expect(@item_with_information.errors.full_messages).to include("Quantityを入力してください")
       end
       it 'quantityは0以下だと登録出来ない' do
         @item_with_information.quantity = 0
         @item_with_information.valid?
-        expect(@item_with_information.errors.full_messages).to include("Quantity is invalid")
+        expect(@item_with_information.errors.full_messages).to include("Quantityis invalid")
       end
       it 'unitは3文字以内でないと登録できない' do
         @item_with_information.unit = '1234'
         @item_with_information.valid?
-        expect(@item_with_information.errors.full_messages).to include("Unit is too long (maximum is 3 characters)")
+        expect(@item_with_information.errors.full_messages).to include("Unitは3文字以内で入力してください")
       end
       it 'purchase_dateが空では登録できない' do
         @item_with_information.purchase_date = ''
         @item_with_information.valid?
-        expect(@item_with_information.errors.full_messages).to include("Purchase date can't be blank")
+        expect(@item_with_information.errors.full_messages).to include("Purchase dateを入力してください")
       end
       it 'is_frozenが空では登録出来ない' do
         @item_with_information.is_frozen = ''
         @item_with_information.valid?
-        expect(@item_with_information.errors.full_messages).to include("Is frozen is not included in the list")
+        expect(@item_with_information.errors.full_messages).to include("Is frozenは一覧にありません")
       end
       it 'userが紐づいていないと登録出来ない' do
         @item_with_information.user_id = nil
         @item_with_information.valid?
-        expect(@item_with_information.errors.full_messages).to include("User can't be blank")
+        expect(@item_with_information.errors.full_messages).to include("Userを入力してください")
       end
       it 'categoryが紐づいていないと登録出来ない' do
         @item_with_information.category_id = nil
         @item_with_information.valid?
-        expect(@item_with_information.errors.full_messages).to include("Category can't be blank")
+        expect(@item_with_information.errors.full_messages).to include("Categoryを入力してください")
       end
     end
   end
