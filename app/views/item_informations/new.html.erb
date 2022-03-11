@@ -1,42 +1,68 @@
+<%= render 'shared/header' %>
+
+<div class="main_top">
+  <h1 class="title">まとめて追加</h1>
+  <div class="top_sub main_top_right">
+    <div class="top_sub_form" id="js_valid_check">
+      <p class="purchase_date_label">購入日</p>
+      <%= date_field('item', 'purchase_date', { class: "form form_normal ipf_purchase_date", id: "js_input_purchase_date", value: Time.now.strftime("%Y-%m-%d") })%>
+    </div>
+    <div class="er_message_box_pd">
+      <div class="error_purchase_date" id="purchase_date_error_message"></div>
+    </div>
+  </div>
+</div>
+
 <div>
   <%= form_with model: @item, url:item_informations_path, local: true do |f| %>
-    <%= f.label :purchase_date %>
-    <%= f.date_field(:purchase_date, {value: Time.now.strftime("%Y-%m-%d")}) %>
+    <%= f.hidden_field :purchase_date, id: "js_hidden_purchase_date", value: Time.now.strftime("%Y-%m-%d") %>
 
-    <div id="item_informations_form_wrap">
-      <%= render partial: 'form', collection: @categories, as: 'category', locals: { f: f } %>
+    <%# 入力フォーム %>
+    <div class="info_form_wrap">
+      <div id="item_informations_form_wrap">
+        <%= render partial: 'form', collection: @categories, as: 'category', locals: { f: f } %>
+      </div>
+
+      <div class="add_category_formbox" id="js_category_list_render">
+        <%= link_to "＋カテゴリーを追加", new_category_item_informations_path, class: "new_category_btn", id: "js_modal_open", remote: true %>
+      </div>
+
+      <div class="submit_box"><%= f.submit '送信', class: "submit", id: "js_valid_check_submit" %></div>
     </div>
+    <%# 入力フォーム %>
 
-    <div id="clone_category" class="hidden">
-      <div id="category_name"></div>
+    <%# クローン用フォーム %>
+    <div id="clone_category" class="hidden category_form_box">
+      <div class="form_category_label">
+        <h3 class="form_title" id="category_name"></h3>
+      </div>
 
       <div class="informations_form" id="clone_informations_form">
         <%= f.fields_for :informations do |ff| %>
           <%= ff.hidden_field :category_id, id:"category_id" %>
 
           <label class="is_frozen">
-            <%= ff.check_box :is_frozen, { id: "check_box" }, "true", "false" %>
-            <%= image_tag("frozen.png", class:"frozen_image grayscale", id:"frozen_img") %>
+            <%= ff.check_box :is_frozen, { class: "ipf_checkbox", id: "check_box" }, "true", "false" %>
+            <%= image_tag("/frozen.png", class:"icon_img grayscale", id:"frozen_img") %>
           </label>
-          <%= ff.text_field :name, placeholder: "名前(20文字以内)", maxlength: "20", id: "name" %>
-          <%= ff.number_field :quantity, step: "0.5", placeholder: "数量(0.5単位)", id: "quantity" %>
-          <%= ff.text_field :unit, placeholder: "単位", id: "unit" %>
-          <%= ff.label :deadline %>
-          <%= ff.date_field(:deadline, { id: "deadline" }) %>
+          <%= ff.text_field :name, placeholder: "名前(20文字以内)", maxlength: "20", class: "form form_normal ipf_name", id: "name" %>
+          <%= ff.number_field :quantity, step: "0.5", placeholder: "数量(0.5単位)", class: "form form_normal ipf_quantity", id: "quantity" %>
+          <%= ff.text_field :unit, placeholder: "単位", class: "form form_normal ipf_unit", id: "unit" %>
+          <%= ff.date_field(:deadline, { class: "form form_normal ipf_deadline", id: "deadline" }) %>
         <% end %>
+
+        <div class="form_box_delete"><%# 幅合わせ %></div>
       </div>
+
       <div class="add_btn_wrap" id="clone">
-        <%= link_to "＋別の食材を追加", "#", id: "js_add_informations_form" %>
+        <%= link_to "＋別の食材を追加", "#", class: "new_form_add", id: "js_add_informations_form" %>
       </div>
     </div>
-
-    <div id="js_category_list_render">
-      <%= link_to "＋カテゴリーを追加", new_category_item_informations_path, remote: true %>
-    </div>
-
-    <%= f.submit '送信' %>
+    <%# クローン用フォーム %>
   <% end %>
+</div>
 
-  <div id="category_list_wrap"></div>
-
+<div class="modal_wrap">
+  <div class="modal_bg"></div>
+  <div class="modal_content" id="js_category_list_append_field"></div>
 </div>

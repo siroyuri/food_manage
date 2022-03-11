@@ -1,18 +1,52 @@
-<div id="js_<%= category.id %>_category_wrap">
-  <div>
-    <%= link_to '削除', category_path(category.id), class:"js_delete_btn", id: "js_#{category.id}_category", method: :delete, remote: true %>
-    <% if category.category_list_id == 0 %>
-      <%= link_to '編集', edit_category_path(category.id) %>
-      <h4><%= category.name %></h4>
-    <% else %>
-      <h4><%= category.category_list.name %></h4>
-    <% end %>
+<div>
+  <div class="er_message_box_pd_top">
+    <div class="error_purchase_date_top" id="purchase_date_error_message"></div>
   </div>
+  <div class="category_box" id="js_<%= category.id %>_category_wrap">
 
-  <div id="js_item_new_or_list_<%= category.id %>">
-    <%= render 'items/form/add_item_form_btn', category_id: category.id %>
+    <div class="category_label">
+      <div class="category_label_left">
+        <div id="add_item_form_btn_wrap">
+          <%= link_to(add_form_item_path(category.id), class: "hover_content", id: "add_item_form_btn", remote: true) do %>
+            <%= image_tag('/plus.png', class:"hover_image")%>
+            <div class="hover_appeared">食材を追加</div>
+          <% end %>
+        </div>
+        <div class="hidden" id="remove_item_form_btn_wrap">
+          <%= link_to(remove_form_item_path(category.id), class: "hover_content", id: "remove_item_form_btn", remote: true) do %>
+            <%= image_tag('/minus.png', class: "hover_image") %>
+            <div class="hover_appeared">追加をやめる</div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="category_label_main">
+        <% if category.category_list_id == 0 %>
+          <h3 class="category_label_name"><%= category.name %></h3>
+        <% else %>
+          <h3 class="category_label_name"><%= category.category_list.name %></h3>
+        <% end %>
+        <div class="purchase_date_top" id="js_valid_check">
+          <p class="purchase_date_label_top">購入日</p>
+          <%= date_field('item', 'purchase_date', { class: "form form_normal ipf_purchase_date_top", id: "js_input_purchase_date", value: Time.now.strftime("%Y-%m-%d") })%>
+        </div>
+      </div>
+
+        <ul class="ed_btn_box">
+        <% if category.category_list_id == 0 %>
+          <li><%= link_to(edit_category_path(category.id), class: "ed_btn_content hover_content") do %>
+            <%= image_tag("/edit.png", class:"hover_image") %>
+            <div class="hover_appeared ed_text">編集</div>
+          <% end %></li>
+        <% end %>
+          <li><%= link_to(category_path(category.id), class: "js_delete_btn ed_btn_content hover_content", id: "js_#{category.id}_category", method: :delete, data: { "turbolinks"=>false }, remote: true) do %>
+            <%= image_tag("/delete.png", class:"hover_image") %>
+            <div class="hover_appeared ed_text">削除</div>
+          <% end %></li>
+        </ul>
+    </div>
+
+    <div class="single_form_wrap" id="js_add_item_form_render_<%= category.id %>"></div>
+    <%= render partial: 'items/top_page/item', collection: category.items, as: "item" %>
   </div>
-
-  <%= render partial: 'items/top_page/item', collection: category.items, as: "item" %>
-
 </div>

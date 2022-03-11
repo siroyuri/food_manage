@@ -1,0 +1,39 @@
+header {
+  height: 100px;
+  width: 100%;
+  background-color: #bee7ff;
+  display: flex;
+}
+
+.header_box {
+  width: calc(100% / 2);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.logo_img {
+  height: 100px;
+  width: 250px;
+}
+
+.header_right {
+  justify-content: flex-end;
+}
+
+.user_name {
+  margin-right: 10px;
+}
+
+.header_btn {
+  padding: 15px 10px;
+  margin: 0 10px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  transition: .3s;
+  box-shadow: 4px 4px 2px #868491;
+}
+
+.header_btn:hover {
+  box-shadow: none;
+}

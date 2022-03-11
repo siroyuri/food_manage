@@ -1,0 +1,248 @@
+.main {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+/* タイトル */
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu_btn {
+  padding: 10px;
+  margin: 0 30px;
+  position: relative;
+}
+
+/* 左 */
+
+.main_left {
+  width: 100%;
+  padding: 0 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* category */
+
+.category_box {
+  width: 700px;
+  margin: 0 10px 20px 10px;
+  background-color: #ffffff;
+  border: 2px solid #bee7ff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.category_label {
+  height: 60px;
+  padding-right: 10px;
+  background-color: #bee7ff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.category_label_left {
+  width: 125px; /*変更不可*/
+}
+
+.category_label_main {
+  width: calc(100% - 125px);
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.category_label_name {
+  white-space: nowrap;
+  font-size: 22px;
+}
+
+/* 購入日入力フォーム */
+
+.purchase_date_top {
+  display: none;
+  align-items: center;
+}
+
+/* 編集・削除ボタン */
+
+.ed_btn_box {
+  height: 40px;
+  min-width: 80px; /*変更禁止*/
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+}
+
+.ed_btn_content {
+  width: 40px;
+}
+
+.ed_text {
+  width: 40px;
+}
+
+/* 単体フォーム */
+
+.label_box_top {
+  height: 30px;
+  width: 100%;
+  padding: 0 10px 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label_under_top {
+  width: 60px;
+}
+
+.label_name_top,
+.label_deadline_top {
+  width: 180px;
+}
+
+.label_quantity_top,
+.label_unit_top {
+  width: 80px;
+}
+
+.single_form_wrap {
+  width: 100%;
+}
+
+.form_field_top {
+  width: 100%;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* item */
+
+.item_wrap {
+  border-top: 2px solid #f0f0f0;
+}
+
+.item_one_line {
+  height: 40px;
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* item_btn */
+
+.item_btn_box {
+  min-width: 60px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.icon_img {
+  width: 20px;
+  height: 20px;
+  margin: 10px 5px;
+  cursor: pointer;
+}
+
+/* info */
+
+.items_box {
+  display: none;
+}
+
+.item_info_box {
+  height: 40px;
+  width: 100%;
+  min-width: 450px;
+  display: flex;
+  align-items: center;
+}
+
+.info_name {
+  width: 40%;
+  min-width: 180px;
+  font-size: 17px;
+  padding: 0 5px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.info_quantity_box {
+  width: 26%;
+  min-width: 115px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.info_quantity {
+  min-width: 60px;
+  margin-right: 5px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.info_unit {
+  max-width: 65px;
+  font-size: 14px;
+  color: #b1b1b1;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.info_date_box {
+  width: 34%;
+  min-width: 155px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.date_type {
+  width: 45px;
+  font-size: 14px;
+  text-align: right;
+  color: #b1b1b1;
+}
+
+.info_date {
+  width: 110px;
+  text-align: center;
+}
+
+/* タブレット・スマホ */
+
+@media (max-width: 1000px) {
+  .main {
+    display: block;
+  }
+
+  .category_box {
+    width: 90%;
+    min-width: 600px;
+    margin: 0px auto 20px;
+  }
+
+  .error_message_box_top {
+    width: 90%;
+    min-width: 600px;
+  }
+
+  .error_purchase_date_top {
+    margin-right: 55px;
+  }
+}

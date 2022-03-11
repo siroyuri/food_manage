@@ -1,36 +1,104 @@
-<div>
-  <div>
+<div class="category_form_box">
+  <div class="form_category_label">
     <% if category.category_list_id == 0 %>
-      <%= category.name %>
+      <h3 class="form_title"><%= category.name %></h3>
     <% else %>
-      <%= category.category_list.name %>
+      <h3 class="form_title"><%= category.category_list.name %></h3>
     <% end %>
   </div>
 
-  <div class="informations_form" id="js_<%= category.id %>_informations_form">
-    <div class="js_item_list_btn_box">
-    <% category.items.each do |item| %>
-      <button class="js_item_list_btn">
-        <span id="list_btn_name"><%= item.name %></span>
-        <span id="list_btn_unit" hidden><%= item.unit %></span>
-      </button>
+  <div class="label_box">
+    <div class="label_top"><%# 幅合わせ %></div>
+    <p class="label_name">名前(10文字以内)</p>
+    <p class="label_quantity">数量</p>
+    <p class="label_unit">単位</p>
+    <p class="label_deadline">消費/賞味期限</p>
+    <div class="label_under"><%# 幅合わせ %></div>
+  </div>
+
+  <%# クローン用 %>
+  <div class="informations_form_wrap hidden" id="js_<%= category.id %>_informations_form">
+    <% if category.items.exists? %>
+      <div class="js_item_list_btn_box hidden">
+        <% category.items.each do |item| %>
+          <button class="js_item_list_btn">
+            <span><%= item.name %> / <%= item.unit %></span>
+            <span id="list_btn_name" hidden><%= item.name %></span>
+            <span id="list_btn_unit" hidden><%= item.unit %></span>
+          </button>
+        <% end %>
+      </div>
     <% end %>
+
+    <div class="informations_form" id="js_valid_check">
+      <%= f.fields_for :informations do |ff| %>
+        <%= ff.hidden_field :category_id, value: category.id, id:"category_id" %>
+
+        <label class="is_frozen">
+          <%= ff.check_box :is_frozen, { class: "ipf_checkbox", id: "check_box" }, "true", "false" %>
+          <%= image_tag("/frozen.png", class:"icon_img grayscale", id:"frozen_img") %>
+        </label>
+        <%= ff.text_field :name, maxlength: "10", class: "form form_normal ipf_name", id: "name" %>
+        <%= ff.number_field :quantity, step: "0.5", class: "form form_normal ipf_quantity", id: "quantity" %>
+        <%= ff.text_field :unit, maxlength: "3", class: "form form_normal ipf_unit", id: "unit" %>
+        <%= ff.date_field(:deadline, { class: "form form_normal ipf_deadline", id: "deadline" }) %>
+      <% end %>
+
+      <div class="form_box_delete"><%# 幅合わせ %></div>
     </div>
-    <%= f.fields_for :informations do |ff| %>
-      <%= ff.hidden_field :category_id, value: category.id, id:"category_id" %>
 
-      <label class="is_frozen">
-        <%= ff.check_box :is_frozen, { id: "check_box" }, "true", "false" %>
-        <%= image_tag("frozen.png", class:"frozen_image grayscale", id:"frozen_img") %>
-      </label>
-      <%= ff.text_field :name, placeholder: "名前(20文字以内)", maxlength: "20", id: "name" %>
-      <%= ff.number_field :quantity, step: "0.5", placeholder: "数量(0.5単位)", id: "quantity" %>
-      <%= ff.text_field :unit, placeholder: "単位", id: "unit" %>
-      <%= ff.label :deadline %>
-      <%= ff.date_field(:deadline, { id: "deadline" }) %>
-    <% end %>
+    <div class="er_message_box" id="error_message_box">
+      <div class="error_top"><%# 幅合わせ %></div>
+      <p class="error_name" id="error_name"></p>
+      <p class="error_quantity" id="error_quantity"></p>
+      <p class="error_unit" id="error_unit"></p>
+      <p class="error_deadline"></p>
+      <div class="error_under"><%# 幅合わせ %></div>
+    </div>
   </div>
+  <%# クローン用 %>
+
+  <div class="informations_form_wrap">
+    <% if category.items.exists? %>
+      <div class="js_item_list_btn_box hidden">
+        <% category.items.each do |item| %>
+          <button class="js_item_list_btn">
+            <span><%= item.name %> / <%= item.unit %></span>
+            <span id="list_btn_name" hidden><%= item.name %></span>
+            <span id="list_btn_unit" hidden><%= item.unit %></span>
+          </button>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="informations_form" id="js_valid_check">
+      <%= f.fields_for :informations do |ff| %>
+        <%= ff.hidden_field :category_id, value: category.id, id:"category_id" %>
+
+        <label class="is_frozen">
+          <%= ff.check_box :is_frozen, { class: "ipf_checkbox", id: "check_box" }, "true", "false" %>
+          <%= image_tag("/frozen.png", class:"icon_img grayscale", id:"frozen_img") %>
+        </label>
+        <%= ff.text_field :name, maxlength: "10", class: "form form_normal ipf_name", id: "name" %>
+        <%= ff.number_field :quantity, step: "0.5", class: "form form_normal ipf_quantity", id: "quantity" %>
+        <%= ff.text_field :unit, maxlength: "3", class: "form form_normal ipf_unit", id: "unit" %>
+        <%= ff.date_field(:deadline, { class: "form form_normal ipf_deadline", id: "deadline" }) %>
+      <% end %>
+
+      <div class="form_box_delete"><%# 幅合わせ %></div>
+    </div>
+
+    <div class="er_message_box" id="error_message_box">
+      <div class="error_top"><%# 幅合わせ %></div>
+      <p class="error_name" id="error_name"></p>
+      <p class="error_quantity" id="error_quantity"></p>
+      <p class="error_unit" id="error_unit"></p>
+      <p class="error_deadline"></p>
+      <div class="error_under"><%# 幅合わせ %></div>
+    </div>
+  </div>
+
   <div id="js_<%= category.id %>">
-    <%= link_to "＋別の食材を追加", "#", id: "js_add_informations_form" %>
+    <%= link_to "＋別の食材を追加", "#", class: "new_form_add", id: "js_add_informations_form" %>
   </div>
 </div>

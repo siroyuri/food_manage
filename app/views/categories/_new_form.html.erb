@@ -1,13 +1,9 @@
-<div id="js_category_checkbox_field">
+<div class="category_list_wrap" id="js_category_checkbox_field">
   <% category_list.each do |list| %>
-    <label>
-      <%= f.check_box :category_list_id, {name: "category[category_lists][][category_list_id]", id: "category_checkbox"}, list.id, nil %>
+    <label class="category_list_checkbox ca_checked_fa">
+      <%= f.check_box :category_list_id, {name: "category[category_lists][][category_list_id]", class: "ipf_checkbox", id: "category_checkbox"}, list.id, nil %>
       <%= f.check_box :name, {name: "category[category_lists][][name]", class: "hidden"}, "", nil %>
       <%= list.name %>
     </label>
   <% end %>
-</div>
-
-<div>
-  <%= f.submit '完了' %>
 </div>

@@ -1,0 +1,42 @@
+/* ホバー時文字下に線が入る */
+
+.hover_content {
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu_btn::after,
+.hover_content::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  content: '';
+  width: 0;
+  height: 2px;
+  background-color: #31aae2;
+  transition: .5s;
+  transform: translateX(-50%);
+}
+
+.menu_btn:hover::after,
+.hover_content:hover::after {
+  width: 100%;
+}
+
+.hover_image {
+  margin: 1.5px;
+  height: 17px;
+  width: 17px;
+}
+
+.hover_appeared {
+  color: black;
+  font-size: 14px;
+  text-align: center;
+  display: none;
+}

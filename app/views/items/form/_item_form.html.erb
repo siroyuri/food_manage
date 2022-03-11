@@ -1,34 +1,54 @@
 <div class="js_item_form">
-  <div id="category_id" hidden><%= category_id %></div>
-  <%= button_to '追加をやめる', remove_form_item_path(category_id), { method: :get, remote: :true } %>
-  
-  
-  <div class="informations_form">
-    <% items.each do |item| %>
-      <div>
-        <button class="js_item_list_btn">
-          <span id="list_btn_name"><%= item.name %></span>
-          <span id="list_btn_unit" hidden><%= item.unit %></span>
-        </button>
+  <div class="hidden" id="category_id"><%= category_id %></div>
+  <div class="informations_form_wrap" id="js_<%= category_id %>_informations_form">
+
+    <% if items.exists? %>
+      <div class="js_item_list_btn_box">
+        <% items.each do |item| %>
+          <button class="js_item_list_btn">
+            <span><%= item.name %> / <%= item.unit %></span>
+            <span id="list_btn_name" hidden><%= item.name %></span>
+            <span id="list_btn_unit" hidden><%= item.unit %></span>
+          </button>
+        <% end %>
       </div>
     <% end %>
-    <%= form_with model: item, url: items_path, local: true do |f| %>
-      <%= f.hidden_field :category_id, value: category_id, id: "category_id" %>
 
-      <label class="is_frozen">
-        <%= f.check_box :is_frozen, { id: "check_box" }, "true", "false" %>
-        <%= image_tag("frozen.png", class:"frozen_image grayscale", id:"frozen_img") %>
-      </label>
-      <%= f.text_field :name, placeholder: "名前(20文字以内)", maxlength: "20", id: "name" %>
-      <%= f.number_field :quantity, step: "0.5", placeholder: "数量(0.5単位)" %>
-      <%= f.text_field :unit, placeholder: "単位", id: "unit" %>
-      <%= f.label :deadline %>
-      <%= f.date_field(:deadline, {}) %>
-      <%= f.label :purchase_date %>
-      <%= f.date_field(:purchase_date, {value: Time.now.strftime("%Y-%m-%d")}) %>
-
-      <%= f.submit '送信' %>
-    <% end %>
+  <div class="label_box_top">
+    <div class="label_top"><%# 幅合わせ %></div>
+    <p class="label_name_top">名前(10文字以内)</p>
+    <p class="label_quantity_top">数量</p>
+    <p class="label_unit_top">単位</p>
+    <p class="label_deadline_top">消費/賞味期限</p>
+    <div class="label_under_top"><%# 幅合わせ %></div>
   </div>
 
+    <%= form_with model: item, url: items_path, local: true do |f| %>
+      <div class="form_field_top" id="js_valid_check">
+        <%= f.hidden_field :category_id, value: category_id, id: "category_id" %>
+        <%= f.hidden_field :purchase_date, id: "js_hidden_purchase_date", value: Time.now.strftime("%Y-%m-%d") %>
+
+        <label class="is_frozen">
+          <%= f.check_box :is_frozen, { class: "ipf_checkbox", id: "check_box" }, "true", "false" %>
+          <%= image_tag("/frozen.png", class:"icon_img grayscale", id:"frozen_img") %>
+        </label>
+        <%= f.text_field :name, maxlength: "10", class: "form form_normal ipf_name_top", id: "name" %>
+        <%= f.number_field :quantity, step: "0.5", class: "form form_normal ipf_quantity", id: "quantity" %>
+        <%= f.text_field :unit, maxlength: "3", class: "form form_normal ipf_unit", id: "unit" %>
+        <%= f.date_field(:deadline, { class: "form form_normal ipf_deadline_top", id: "deadline" }) %>
+
+        <%= f.submit '送信', class: "single_form_submit", id: "js_valid_check_submit" %>
+      </div>
+
+      <div class="er_message_box_top" id="error_message_box">
+        <div class="error_top"><%# 幅合わせ %></div>
+        <p class="error_name_top" id="error_name"></p>
+        <p class="error_quantity" id="error_quantity"></p>
+        <p class="error_unit" id="error_unit"></p>
+        <p class="error_deadline_top"></p>
+        <div class="error_under_top"><%# 幅合わせ %></div>
+      </div>
+    </div>
+    <% end %>
+  </div>
 </div>

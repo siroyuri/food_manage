@@ -1,9 +1,27 @@
 $(function () {
+  // 既存フォーム削除
   if ($('.js_item_form').length) {
     var categoryId = $('.js_item_form').find('#category_id').text();
-    console.log(categoryId)
-    $("<%= j(render 'items/form/add_item_form_btn', category_id: 0)%>").replaceAll($('.js_item_form')).attr('action', `/items/${categoryId}/add_form`);
+    var categoryBox = $(`#js_${categoryId}_category_wrap`);
+    var PDErrorBox = categoryBox.prev('.er_message_box_pd_top').find('#purchase_date_error_message');
+
+    categoryBox.find('#add_item_form_btn_wrap').removeClass('hidden');
+    categoryBox.find('#remove_item_form_btn_wrap').addClass('hidden');
+    categoryBox.find('.purchase_date_top').css('display', 'none');
+    PDErrorBox.text('').removeClass('er');
+    categoryBox.find('.js_item_form').remove();
   }
 
-  $('#js_item_new_or_list_<%= @category_id %>').html("<%= j(render 'items/form/item_form', item: @item, items: @items, category_id: @category_id)%>");
+  // 新規フォーム追加
+  var categoryBox = $('#js_<%= @category_id %>_category_wrap');
+  var renderField = categoryBox.find('#js_add_item_form_render_<%= @category_id %>');
+  var renderContent = "<%= j(render 'items/form/item_form', item: @item, items: @items, category_id: @category_id)%>";
+
+  categoryBox.find('#remove_item_form_btn_wrap').removeClass('hidden');
+  categoryBox.find('#add_item_form_btn_wrap').addClass('hidden');
+  categoryBox.find('.ipf_purchase_date_top').val('<%= Time.now.strftime("%Y-%m-%d")%>');
+  categoryBox.find('#js_input_purchase_date').removeClass('form_error');
+  categoryBox.find('#js_input_purchase_date').addClass('form_normal');
+  categoryBox.find('.purchase_date_top').css('display', 'flex');
+  renderField.append(renderContent);
 });

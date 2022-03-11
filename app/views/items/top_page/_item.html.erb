@@ -1,49 +1,95 @@
-<div id="js_<%= item.id %>_item_wrap">
 <% if item.item_informations.present? %>
-  <%= link_to '削除', item_path(item.id), class:"js_delete_btn", id: "js_#{item.id}_item", method: :delete, remote: true %>
-
   <% if item.item_informations.length == 1 %>
 
     <% item.item_informations.each do |info| %>
-      <div>
-        <%= link_to '編集', edit_item_information_path(info.id) %>
+      <div class="item_wrap item_one_line" id="js_<%= item.id %>_item_wrap">
 
-        <%= render 'items/top_page/is_frozen', info: info %>
+        <div class="item_btn_box">
+          <div><%= image_tag("/star.png", class: "icon_img") %></div>
+          <%= render 'items/top_page/is_frozen', info: info %>
+        </div>
 
-        <%= item.name %>:
-        <% if info.quantity % 1 == 0 %>
-          <%= info.quantity.floor %>
-        <% else %>
-          <%= info.quantity %>
-        <% end %>
-          <%= item.unit %>:
-        <% if info.deadline.present? %>
-          <%= info.deadline %>
-        <% else %>
-          <%= info.purchase_date %>
-        <% end %>
+        <div class="item_info_box">
+          <div class="info_name"><%= item.name %></div>
+
+          <div class="info_quantity_box">
+            <% if info.quantity % 1 == 0 %>
+              <div class="info_quantity"><%= info.quantity.floor %></div>
+            <% else %>
+              <div class="info_quantity"><%= info.quantity %></div>
+            <% end %>
+
+            <div class="info_unit"><%= item.unit %></div>
+          </div>
+
+          <div class="info_date_box">
+            <% if info.deadline.present? %>
+              <div class="date_type">期限</div>
+              <div class="info_date"><%= info.deadline %></div>
+            <% else %>
+              <div class="date_type">購入日</div>
+              <div class="info_date"><%= info.purchase_date %></div>
+            <% end %>
+          </div>
+        </div>
+
+        <ul class="ed_btn_box">
+          <li><%= link_to(edit_item_information_path(info.id), class: "ed_btn_content hover_content") do %>
+            <%= image_tag("/edit.png", class:"hover_image") %>
+            <div class="hover_appeared ed_text">編集</div>
+          <% end %></li>
+
+          <li><%= link_to(item_path(item.id), class:"js_delete_btn ed_btn_content hover_content", id: "js_#{item.id}_item", method: :delete, remote: true) do %>
+            <%= image_tag("/delete.png", class:"hover_image") %>
+            <div class="hover_appeared ed_text">削除</div>
+          <% end %></li>
+        </ul>
       </div>
     <% end %>
 
   <% else %>
 
-    <%= item.name %>:
-    <% @sum_quantities.each do |sum_quantity| %>
-    <% if item.id == sum_quantity.item_id %>
+    <div class="item_wrap" id="js_<%= item.id %>_item_wrap">
+      <div class="item_one_line">
+        <div class="item_btn_box">
+          <div><%= image_tag("/star.png", class: "icon_img") %></div>
+          <div><%= image_tag("/arrow_off.png", class: "icon_img", id: "js_arrow_img") %></div>
+        </div>
 
-      <% if sum_quantity.quantity_total % 1 == 0 %>
-        <%= sum_quantity.quantity_total.floor %>
-      <% else %>
-        <%= sum_quantity.quantity_total %>
-      <% end %>
-      <%= item.unit %>
+        <div class="item_info_box">
+          <div class="info_name"><%= item.name %></div>
 
-    <% end %><%# if.id=id %>
-    <% end %><%# sum_quantity %>
+          <div class="info_quantity_box">
+            <% @sum_quantities.each do |sum_quantity| %>
+            <% if item.id == sum_quantity.item_id %>
 
-    <%= render partial: 'items/top_page/multiple_item', collection: item.item_informations, as: "info", locals: { unit: item.unit } %>
+              <% if sum_quantity.quantity_total % 1 == 0 %>
+                <div class="info_quantity"><%= sum_quantity.quantity_total.floor %></div>
+              <% else %>
+                <div class="info_quantity"><%= sum_quantity.quantity_total %></div>
+              <% end %>
+
+            <% end %><%# if.id=id %>
+            <% end %><%# sum_quantity %>
+
+            <div class="info_unit"><%= item.unit %></div>
+          </div>
+
+          <div class="info_date_box"><%# 幅合わせのため配置 %></div>
+        </div>
+
+        <ul class="ed_btn_box">
+          <li><%= link_to(item_path(item.id), class:"js_delete_btn ed_btn_content hover_content", id: "js_#{item.id}_item", method: :delete, remote: true) do %>
+            <%= image_tag("/delete.png", class:"hover_image") %>
+            <div class="hover_appeared ed_text">削除</div>
+          </li><% end %>
+        </ul>
+      </div>
+
+      <div class="items_box">
+        <%= render partial: 'items/top_page/multiple_item', collection: item.item_informations, as: "info", locals: { unit: item.unit } %>
+      </div>
+    </div>
 
   <% end %><%# if.length>1 %>
-
 <% end %><%# if.present? %>
-</div>
