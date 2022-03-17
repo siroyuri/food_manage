@@ -1,8 +1,12 @@
-<div>
-  <input type="text" maxlength="10" id="js_input_category_name">
-  <button id="js_category_name_submit">追加</button>
+<div class="new_category_input">
+  <input type="text" maxlength="10" class="form ipf_category" id="js_input_category_name">
+  <button class="category_submit" id="js_category_name_submit">追加</button>
 </div>
 
-<%= form_with model: category, url: categories_path, remote: true do |f| %>
+<%= form_with model: category, url: categories_path, data: {"turbolinks"=>true}, remote: true do |f| %>
   <%= render 'categories/new_form', f: f, category_list: category_list %>
+
+  <div class="submit_box">
+    <%= f.submit '完了', class: "submit", id: "js_modal_close" %>
+  </div>
 <% end %>

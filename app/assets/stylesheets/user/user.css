@@ -1,0 +1,50 @@
+.user_form_wrap {
+  width: 400px;
+  margin: 20px auto 10px;
+  padding: 20px 40px;
+  background-color: #ffffff;
+  border: 2px solid #bee7ff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user_form {
+  padding-bottom: 30px;
+}
+
+.user_form_content {
+  height: 90px;
+  padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.user_form_label {
+  height: 30px;
+}
+
+.user_link {
+  text-align: center;
+}
+
+.user_submit_wrap {
+  padding: 5px;
+}
+
+.user_submit_btn {
+  height: 40px;
+  width: 130px;
+  background-color: #bee7ff;
+  border: none;
+  cursor: pointer;
+}
+
+.user_submit:hover {
+  background-color: #ffffff;
+  border: 2px solid #bee7ff;
+}

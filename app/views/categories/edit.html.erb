@@ -1,6 +1,16 @@
+<%= render 'shared/header' %>
+
+<div class="main_top">
+  <h1 class="title">編集</h1>
+</div>
+
 <%= form_with model: @category, local: true do |input_f| %>
-  <div>
-    <%= input_f.text_area :name, placeholder: "10文字以内", maxlength: 10, id: "js_input_field" %>
-    <%= input_f.submit '完了' %>
+  <div class="edit_form_wrap">
+    <div class="edit_form_content">
+      <p class="edit_form_label">カテゴリー名</p>
+      <%= input_f.text_field :name, class: "form form_normal edit_form_ca_name", placeholder: "10文字以内", maxlength: 10, id: "js_input_field" %>
+      <div><p class="edit_form_error">エラー文やで</p></div>
+    </div>
+    <%= input_f.submit '完了', class: "edit_form_submit" %>
   </div>
 <% end %>

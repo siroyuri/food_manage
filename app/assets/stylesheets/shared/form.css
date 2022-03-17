@@ -1,0 +1,111 @@
+/* 共通スタイル */
+
+.form {
+  height: 40px;
+  padding: 0 5px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+}
+
+.form_normal {
+  box-shadow: 0 0 0 1px #e2e2e2 inset;
+}
+
+.form_normal:focus {
+  outline: 0;
+  box-shadow: 0 0 0 2px #6b9fff inset;
+}
+
+.form_error {
+  box-shadow: 0 0 0 2px #ff3a3a inset;
+}
+
+.form_error:focus {
+  outline: 0;
+  box-shadow: 0 0 0 2px #ff3ae5 inset;
+}
+
+.ipf_checkbox {
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  margin: -1px;
+}
+
+/* 個別スタイル */
+
+.ipf_purchase_date,
+.ipf_name,
+.ipf_deadline,
+.ipf_category {
+  width: 200px;
+}
+
+.ipf_purchase_date_top,
+.ipf_name_top,
+.ipf_deadline_top {
+  width: 180px;
+}
+
+.ipf_quantity,
+.ipf_unit {
+  width: 80px;
+}
+
+/* ラベル */
+
+.purchase_date_label {
+  margin-right: 20px;
+}
+
+.purchase_date_label_top {
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+/* 送信ボタン */
+
+.submit_box {
+  text-align: center;
+}
+
+.submit {
+  height: 40px;
+  width: 200px;
+  margin: 20px 0;
+  background-color: #bee7ff;
+  border: none;
+  cursor: pointer;
+}
+
+.category_submit {
+  height: 40px;
+  width: 60px;
+  margin-left: 10px;
+  background-color: #bee7ff;
+  border: none;
+  cursor: pointer;
+}
+
+.single_form_submit {
+  height: 40px;
+  width: 60px;
+  margin: 0 5px;
+  background-color: #bee7ff;
+  border: none;
+  cursor: pointer;
+}
+
+.submit:hover,
+.single_form_submit:hover,
+.category_submit:hover {
+  background-color: #ffffff;
+  border: 2px solid #bee7ff;
+}

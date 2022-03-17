@@ -1,18 +1,40 @@
-<div>
-  <%= link_to '削除', item_information_path(info.id), method: :delete, remote: true %>
-  <%= link_to '編集', edit_item_information_path(info.id) %>
-
-  <%= render 'items/top_page/is_frozen', info: info %>
+<div class="item_one_line">
+  <div class="item_btn_box">
+    <%= render 'items/top_page/is_frozen', info: info %>
+  </div>
   
-  <% if info.quantity % 1 == 0 %>
-    <%= info.quantity.floor %>
-  <% else %>
-    <%= info.quantity %>
-  <% end %>
-    <%= unit %>:
-  <% if info.deadline.present? %>
-    <%= info.deadline %>
-  <% else %>
-    <%= info.purchase_date %>
-  <% end %>
+  <div class="item_info_box">
+    <div class="info_name"><%# 幅合わせのため配置 %></div>
+
+    <div class="info_quantity_box">
+      <% if info.quantity % 1 == 0 %>
+        <div class="info_quantity"><%= info.quantity.floor %></div>
+      <% else %>
+        <div class="info_quantity"><%= info.quantity %></div>
+      <% end %>
+
+      <div class="info_unit"><%= unit %></div>
+    </div>
+
+    <div class="info_date_box">
+    <% if info.deadline.present? %>
+      <div class="date_type">期限</div>
+      <div class="info_date"><%= info.deadline %></div>
+    <% else %>
+      <div class="date_type">購入日</div>
+      <div class="info_date"><%= info.purchase_date %></div>
+    <% end %>
+    </div>
+  </div>
+
+  <ul class="ed_btn_box">
+    <li><%= link_to(edit_item_information_path(info.id), class: "ed_btn_content hover_content") do %>
+      <%= image_tag("/edit.png", class:"hover_image") %>
+      <div class="hover_appeared ed_text">編集</div>
+    <% end %></li>
+    <li><%= link_to(item_information_path(info.id), class: "ed_btn_content hover_content", method: :delete, remote: true) do %>
+      <%= image_tag("/delete.png", class:"hover_image") %>
+      <div class="hover_appeared ed_text">削除</div>
+    <% end %></li>
+  </ul>
 </div>

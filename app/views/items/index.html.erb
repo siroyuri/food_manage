@@ -1,22 +1,28 @@
+<%= render 'shared/header' %>
 
-<% if user_signed_in? %>
-  <div><%= current_user.name %></div>
-  <div><%= link_to "ログアウト", destroy_user_session_path, method: :delete %><div>
-  <%= link_to "カテゴリー追加", new_category_path %>
-  <%= link_to "食材をまとめて追加", new_item_information_path %>
-<% else %>
-  <div><%= link_to "ログイン", new_user_session_path %></div>
-  <div><%= link_to "新規登録", new_user_registration_path %></div>
-<% end %>
+<div class="main_top">
+  <h1 class="title">食材一覧</h1>
 
-<% if flash[:success] %>
-  <div><%= flash[:success] %></div>
-<% elsif flash[:error] %>
- <div>
-    <% flash[:error].each do |message| %>
-      ・<%= message %>
-    <% end %>
+  <div class="top_sub menu">
+    <div><%= link_to "カテゴリー追加", new_category_path, class: "menu_btn" %></div>
+    <div><%= link_to "食材をまとめて追加", new_item_information_path, class: "menu_btn" %></div>
   </div>
-<% end %>
+</div>
 
-<%= render partial: 'items/top_page/category', collection: @categories, as: 'category' %>
+<div class="main">
+  <div class="main_right">
+    <div class="news">
+      <% if flash[:success] %>
+        <div><%= flash[:success] %></div>
+      <% elsif flash[:error] %>
+        <% flash[:error].each do |message| %>
+          <div>・<%= message %></div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="main_left">
+    <%= render partial: 'items/top_page/category', collection: @categories, as: 'category' %>
+  </div>
+</div>

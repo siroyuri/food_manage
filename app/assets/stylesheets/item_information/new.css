@@ -1,0 +1,153 @@
+/* タイトル */
+
+.main_top_right {
+  padding-right: 50px;
+}
+
+.top_sub_form {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* フォーム */
+
+.info_form_wrap {
+  height: 100%;
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+/* カテゴリー名 */
+
+.category_form_box {
+  width: 700px;
+  margin: 0 auto 20px;
+  background-color: #ffffff;
+  border: 2px solid #bee7ff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.form_category_label {
+  height: 60px;
+  background-color: #bee7ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form_title {
+  font-size: 22px;
+}
+
+/* アイテムリスト */
+
+.js_item_list_btn_box {
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  overflow: scroll visible;
+}
+
+.js_item_list_btn {
+  height: 25px;
+  margin-right: 5px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: 1px solid black;
+}
+
+.js_item_list_btn:hover {
+  background-color: #bee7ff;
+}
+
+/* ラベル */
+
+.label_box {
+  height: 30px;
+  width: 100%;
+  padding: 5px 10px 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label_top,
+.label_under {
+  width: 30px;
+  padding-left: 5px;
+}
+
+.label_name,
+.label_deadline {
+  width: 200px;
+  padding-left: 5px;
+}
+
+.label_quantity,
+.label_unit {
+  width: 80px;
+  padding-left: 5px;
+}
+
+/* フォーム */
+
+.informations_form {
+  height: 50px;
+  padding: 5px 10px 5px 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.new_form_add {
+  height: 40px;
+  font-size: 18px;
+  letter-spacing: 5px;
+  color: #b1b1b1;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new_form_add:hover,
+.new_category_btn:hover {
+  color: #4ca6da;
+}
+
+.form_box_delete {
+  min-height: 40px;
+  width: 30px;
+}
+
+/* カテゴリー追加ボタン */
+
+.add_category_formbox {
+  width: 700px;
+  margin: 20px auto;
+}
+
+.new_category_btn {
+  height: 60px;
+  font-size: 22px;
+  background-color: #ffffff;
+  color: #b1b1b1;
+  letter-spacing: 5px;
+  border: 2px solid #bee7ff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* タブレット・スマホ */
+
+@media (max-width: 1000px) {
+  .category_form_box {
+    width: 90%;
+    min-width: 700px;
+  }
+}

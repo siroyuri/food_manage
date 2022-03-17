@@ -1,3 +1,10 @@
 $(function () {
-  $('.js_item_form').replaceWith("<%= j(render 'items/form/add_item_form_btn', category_id: @category_id)%>");
+  var categoryBox = $('#js_<%= @category_id %>_category_wrap');
+  var PDErrorBox = categoryBox.prev('.er_message_box_pd_top').find('#purchase_date_error_message');
+
+  categoryBox.find('#remove_item_form_btn_wrap').addClass('hidden');
+  categoryBox.find('#add_item_form_btn_wrap').removeClass('hidden');
+  categoryBox.find('.purchase_date_top').css('display', 'none');
+  PDErrorBox.text('').removeClass('er');
+  categoryBox.find('.js_item_form').remove();
 });

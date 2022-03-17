@@ -9,10 +9,9 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    if params[:category].present?
-      @new_category = Category.save_list(category_params)
-
-      respond_to do |format|
+    respond_to do |format|
+      if params[:category].present?
+        @new_category = Category.save_list(category_params)
         format.html {
             if @new_category == false
               flash[:error] = ["保存に失敗しました"]
@@ -21,7 +20,10 @@ class CategoriesController < ApplicationController
             end
             redirect_to root_path
         }
-  
+
+        format.js {}
+      else
+        format.html { redirect_to root_path }
         format.js {}
       end
     end

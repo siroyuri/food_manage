@@ -1,4 +1,7 @@
 $(function () {
+  $('.modal_wrap').fadeOut();
+  $('#js_category_list_append_field').empty();
+  
   <% if @new_category.present? %>
     <% @new_category.each do |category| %>
       var categoryId = "<%= category.id %>"
@@ -30,5 +33,4 @@ $(function () {
       $('#item_informations_form_wrap').append(cloneCategory);
     <% end %>
   <% end %>
-  $('#category_list_wrap').empty();
 });

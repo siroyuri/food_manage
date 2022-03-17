@@ -6,7 +6,6 @@ class ItemsController < ApplicationController
     @categories = current_user.categories.order("category_list_id ASC").all.includes(items: [:item_informations])
     sql1 = "SELECT item_id, SUM(quantity) AS quantity_total FROM item_informations WHERE user_id = #{current_user.id} GROUP BY item_id HAVING COUNT(item_id) > 1"
     @sum_quantities = ItemInformation.find_by_sql(sql1)
-    @item = ItemWithInformation.new
   end
 
   def create
