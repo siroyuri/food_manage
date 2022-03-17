@@ -8,7 +8,7 @@ $(document).on('turbolinks:load', function() {
       var formName = `form_item_collection[informations_attributes][${dateNow}]`
       var removeBtn = `
         <a class="js_delete_btn" id="js_${dateNow}_form" href="#">
-          <img class="icon_img" src="http://localhost:3000/delete.png">
+          <img class="icon_img" src="/delete.png">
         </a>
       `
     
