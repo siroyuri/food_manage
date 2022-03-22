@@ -13,10 +13,10 @@
   <div class="main_right">
     <div class="news">
       <% if flash[:success] %>
-        <div><%= flash[:success] %></div>
+        <div class="news_content normal_news"><%= flash[:success] %></div>
       <% elsif flash[:error] %>
         <% flash[:error].each do |message| %>
-          <div>・<%= message %></div>
+          <div class="news_content error_news"><%= message %></div>
         <% end %>
       <% end %>
     </div>
