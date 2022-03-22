@@ -83,6 +83,57 @@ $(document).on('turbolinks:load', function() {
       }
     });
 
+    $('body').on('input', '#js_valid_check_edf input', function () { // 編集ページ
+      var edf = $(this).parents('#js_valid_check_edf');
+      var erBox = edf.next('#error_message_box');
+
+      // category_name 入力必須
+      if ( edf.find('#ca_name').val() == '' ) {
+        addError(edf.find('#ca_name'));
+        erBox.find('#error_ca_name').text('※入力必須').addClass('er');
+      } else {
+        removeError(edf.find('#ca_name'), erBox.find('#error_ca_name'));
+      }
+      // name 入力必須
+      if ( edf.find('#name').val() == '' ) {
+        addError(edf.find('#name'));
+        erBox.find('#error_name').text('※入力必須').addClass('er');
+      } else if ( edf.find('#name').val().length > 10 )  {
+        // 10文字以内
+        addError(edf.find('#name'));
+        erBox.find('#error_name').text('※10文字以内').addClass('er');
+      } else {
+        removeError(edf.find('#name'), erBox.find('#error_name'));
+      }
+      // quantity 入力必須
+      if ( edf.find('#quantity').val() == '' ) {
+        addError(edf.find('#quantity'));
+        erBox.find('#error_quantity').text('※入力必須').addClass('er');
+      } else {
+        removeError(edf.find('#quantity'), erBox.find('#error_quantity'));
+      }
+      // unit 入力必須
+      if ( edf.find('#unit').val().length > 3 ) {
+        addError(edf.find('#unit'));
+        erBox.find('#error_unit').text('※3文字以内').addClass('er');
+      } else {
+        removeError(edf.find('#unit'), erBox.find('#error_unit'));
+      }
+      // purchase_date 入力必須
+      if ( edf.find('#purchase_date').val() == '' ) {
+        addError(edf.find('#purchase_date'));
+        erBox.find('#error_purchase_date').text('※入力必須').addClass('er');
+      } else {
+        removeError(edf.find('#purchase_date'), erBox.find('#error_purchase_date'));
+      }
+
+      if ( $('.er').length ) {
+        $('#js_valid_check_submit').prop('disabled', true);
+      } else {
+        $('#js_valid_check_submit').prop('disabled', false);
+      }
+    });
+
     $('body').on('click', '.js_item_list_btn', function(e) {
       e.preventDefault();
       var informationsForm = $(this).parents('.informations_form_wrap').find('#js_valid_check');

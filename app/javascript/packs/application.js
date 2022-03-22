@@ -15,6 +15,7 @@ require("../item_list_btn")
 require("../new_category")
 require("../animation")
 require("../validation")
+require("../toppage_news")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
