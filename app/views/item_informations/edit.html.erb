@@ -1,14 +1,43 @@
-<%= form_with model: @info, local: true do |f| %>
-  <%= f.hidden_field :category_id, value: @item.category_id %>
+<%= render 'shared/header' %>
 
-  <%= f.check_box :is_frozen, {}, "true", "false" %>
-  <%= f.text_field :name, placeholder: "名前(20文字以内)", maxlength: "20", value: @item.name %>
-  <%= f.number_field :quantity, step: "0.5", placeholder: "数量(0.5単位)" %>
-  <%= f.text_field :unit, placeholder: "単位", value: @item.unit %>
-  <%= f.label :deadline %>
-  <%= f.date_field(:deadline, {}) %>
-  <%= f.label :purchase_date %>
-  <%= f.date_field(:purchase_date, {value: Time.now.strftime("%Y-%m-%d")}) %>
+<div class="main_top">
+  <h1 class="title">編集</h1>
+</div>
 
-  <%= f.submit '送信' %>
-<% end %>
+<div class="edit_form_wrap">
+  <%= form_with model: @info, local: true do |f| %>
+    <%= f.hidden_field :category_id, value: @item.category_id %>
+
+    <div class="edit_form_labels">
+      <div class="label_top"><%# 幅合わせ %></div>
+      <p class="label_name">名前(10文字以内)</p>
+      <p class="label_quantity">数量</p>
+      <p class="label_unit">単位</p>
+      <p class="label_deadline">消費/賞味期限</p>
+      <p class="label_purchase_date">購入日</p>
+    </div>
+
+    <div class="edit_form_input" id="js_valid_check_edf">
+      <label class="is_frozen">
+        <%= f.check_box :is_frozen, { class: "ipf_checkbox", id: "check_box" }, "true", "false" %>
+        <%= image_tag("/frozen.png", class:"icon_img grayscale", id:"frozen_img") %>
+      </label>
+      <%= f.text_field :name, maxlength: "10", class: "form form_normal ipf_name", id: "name", value: @item.name %>
+      <%= f.number_field :quantity, step: "0.5", class: "form form_normal ipf_quantity", id: "quantity" %>
+      <%= f.text_field :unit, maxlength: "3", class: "form form_normal ipf_unit", id: "unit", value: @item.unit %>
+      <%= f.date_field(:deadline, { class: "form form_normal ipf_deadline", id: "deadline" }) %>
+      <%= f.date_field(:purchase_date, { class: "form form_normal ipf_purchase_date", id: "purchase_date", value: Time.now.strftime("%Y-%m-%d")}) %>
+    </div>
+
+    <div class="edit_form_errors" id="error_message_box">
+      <div class="error_top"><%# 幅合わせ %></div>
+      <p class="error_name" id="error_name"></p>
+      <p class="error_quantity" id="error_quantity"></p>
+      <p class="error_unit" id="error_unit"></p>
+      <p class="error_deadline"><%# 幅合わせ %></p>
+      <p class="error_purchase_date" id="error_purchase_date"></p>
+    </div>
+
+    <div class="edit_form_submit_wrap"><%= f.submit '送信', class: "edit_form_submit_btn", id: "js_valid_check_submit" %></div>
+  <% end %>
+</div>

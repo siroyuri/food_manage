@@ -4,3 +4,11 @@ ja:
       user:
         name: 名前
         email: メールアドレス
+
+  activemodel:
+    attributes:
+      item_with_information:
+        name: 名前
+        unit: 単位
+        quantity: 数量
+        purchase_date: 購入日

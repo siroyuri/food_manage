@@ -105,7 +105,8 @@
 
 .submit:hover,
 .single_form_submit:hover,
-.category_submit:hover {
+.category_submit:hover,
+.edit_form_submit_btn:hover {
   background-color: #ffffff;
   border: 2px solid #bee7ff;
 }
