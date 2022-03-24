@@ -6,10 +6,11 @@ Food Manage
 カテゴリー別に分類して管理します。
 
 # URL
-デプロイしたら追記します。
+https://food-manage.herokuapp.com/
 
 # テスト用アカウント
-後々追記します。
+Email：te@te
+Password：111qqq
 
 # 利用方法
 ユーザー登録後、トップページの「カテゴリーを追加」から、新しいカテゴリーを追加、  
