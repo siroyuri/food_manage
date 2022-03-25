@@ -9,7 +9,7 @@ Food Manage
 https://food-manage.herokuapp.com/
 
 # テスト用アカウント
-Email：te@te
+Email：te@te  
 Password：111qqq
 
 # 利用方法
@@ -29,34 +29,34 @@ Password：111qqq
 
 # 実装した機能についての説明
 ## ユーザー管理機能
-[![Image from Gyazo](https://i.gyazo.com/733cede0bae8c51dea5df6752d294256.gif)](https://gyazo.com/733cede0bae8c51dea5df6752d294256)
+[![Image from Gyazo](https://i.gyazo.com/0b931e02cf8b2c3f7c604414afdfe4fc.gif)](https://gyazo.com/0b931e02cf8b2c3f7c604414afdfe4fc)
 名前、メールアドレス、パスワードを使用してアカウントを作成できます。  
 登録済みであれは、ログインページからメールアドレスとパスワードを使用してログインできます。
 ログアウトボタンはヘッダーに表示されるので基本どのページからでもログアウトできます。
 
 ## カテゴリー追加機能
-[![Image from Gyazo](https://i.gyazo.com/3facfca94a122dc898b34c1825d69172.gif)](https://gyazo.com/3facfca94a122dc898b34c1825d69172)
+[![Image from Gyazo](https://i.gyazo.com/0f0b32f6a2c5807055b714272f057663.gif)](https://gyazo.com/0f0b32f6a2c5807055b714272f057663)
 「野菜」「肉」などの大枠を追加できます。  
 あらかじめ用意されたリストから選ぶ「選択式」と、オリジナルのカテゴリーを作成できる「入力式」があります。
 
 ## 食材追加機能
-[![Image from Gyazo](https://i.gyazo.com/64a2d5272e8cba0e968a322f973dac76.gif)](https://gyazo.com/64a2d5272e8cba0e968a322f973dac76)
-[![Image from Gyazo](https://i.gyazo.com/c5d8662234ea82533f47a40ed8665668.gif)](https://gyazo.com/c5d8662234ea82533f47a40ed8665668)
+[![Image from Gyazo](https://i.gyazo.com/94d76060a1db7407bdaa0faf1e0bbf83.gif)](https://gyazo.com/94d76060a1db7407bdaa0faf1e0bbf83)
+[![Image from Gyazo](https://i.gyazo.com/1ec95aceffd1211e2d9df5ef10974c33.gif)](https://gyazo.com/1ec95aceffd1211e2d9df5ef10974c33)
 トップページから追加できます。  
 食材の「名前」「数量」「単位」「賞味/消費期限」「購入日」を登録します。  
 在庫がある食材はリストに表示され、リストを選択すると「名前」「単位」が自動で入力されます。
 
 ## 一覧表示機能
-[![Image from Gyazo](https://i.gyazo.com/b928ecb6f9efb852923e1a6d5a60d76e.gif)](https://gyazo.com/b928ecb6f9efb852923e1a6d5a60d76e)
+[![Image from Gyazo](https://i.gyazo.com/382f642ded6b2f5fad8c30fb9e9295ea.gif)](https://gyazo.com/382f642ded6b2f5fad8c30fb9e9295ea)
 トップページになります。  
 追加した食材がカテゴリー別に分けて表示されます。
 
 ## 食材の複数追加機能
-[![Image from Gyazo](https://i.gyazo.com/2633808ba735d6ef111ba410730f30f7.gif)](https://gyazo.com/2633808ba735d6ef111ba410730f30f7)
-[![Image from Gyazo](https://i.gyazo.com/0ab35cfec83bae31b33b29f1b79797b2.gif)](https://gyazo.com/0ab35cfec83bae31b33b29f1b79797b2)
+[![Image from Gyazo](https://i.gyazo.com/669550eb9127bf234388f1bef6b9e6d0.gif)](https://gyazo.com/669550eb9127bf234388f1bef6b9e6d0)
+[![Image from Gyazo](https://i.gyazo.com/87b17948803a55c4fa224fff98c04735.gif)](https://gyazo.com/87b17948803a55c4fa224fff98c04735)
 食材を複数同時に追加できます。  
 「別の食材を追加」を押すことでフォームを増やせます。
-[![Image from Gyazo](https://i.gyazo.com/75d6fe7ffa36d5f55a6d0408ed6a1f10.gif)](https://gyazo.com/75d6fe7ffa36d5f55a6d0408ed6a1f10)
+[![Image from Gyazo](https://i.gyazo.com/3c44d7966a24bb03c669ad804d3624f9.gif)](https://gyazo.com/3c44d7966a24bb03c669ad804d3624f9)
 ここからカテゴリーの追加も可能です。  
 画面遷移は行われないので入力内容が消えることもありません。
 
